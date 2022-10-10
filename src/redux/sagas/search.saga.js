@@ -3,6 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* searchBooks(action) {
     // action.payload is a string
+    console.log('IN SEARCH BOOKS!!!!')
     const query = action.payload.query;
     const searchType = action.payload.searchType;
     console.log('Search query:', action.payload.query);
