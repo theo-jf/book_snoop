@@ -1,0 +1,27 @@
+.popupBackground {
+    background: rgb(67, 63, 63);
+    opacity: .3;
+    pointer-events: none;
+}
+
+.popupForeground {
+    /* Slightly off center for visual appeal ? */
+    top: 48%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    position: fixed;
+    display: block;
+    text-align: center;
+    background-color: beige;
+}
+
+
+.popupHidden {
+    visibility: hidden;
+}
+
+.editionsListItem {
+    padding-left: 10px;
+}
