@@ -39,10 +39,10 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Nav /> */}
-        {/* <Switch> */}
+        <Nav />
+        <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          {/* <Redirect exact from="/" to="/home" /> */}
+          <Redirect exact from="/home" to="/search" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           {/* <Route exact path="/about" */}
@@ -106,10 +106,10 @@ function App() {
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
-          {/* <Route>
+          <Route>
             <h1>404</h1>
-          </Route> */}
-        {/* </Switch> */}
+          </Route>
+        </Switch>
         <Footer />
       </div>
     </Router>
