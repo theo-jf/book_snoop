@@ -13,6 +13,8 @@ import './Profile.css';
 export default function Profile() {
 
     const userInfo = useSelector(store => store.user);
+    const library = useSelector(store => store.profileReducers.library);
+    const wishlist = useSelector(store => store.profileReducers.wishlist);
 
     const dispatch = useDispatch();
 
