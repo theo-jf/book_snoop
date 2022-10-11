@@ -98,6 +98,7 @@ function App() {
           </Route>
 
           <Route path="/search/editions/:bookNumber">
+            {/* Further sort/search functionality within editions?? */}
             <EditionsList />
           </Route>
 
