@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 // Import components
+import Home from '../Home/Home';
 import SearchPage from '../SearchPage/SearchPage';
 import MapInfo from '../MapInfo/MapInfo';
 import EditionsList from '../SearchPage/EditionsList';
@@ -42,7 +43,7 @@ function App() {
         <Header />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/home" to="/search" />
+          <Redirect exact from="/" to="/home" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           {/* <Route exact path="/about" */}
@@ -70,7 +71,7 @@ function App() {
 
           <Route exact path="/home">
             {/* *** Put home search bar here *** */}
-
+            <Home />
           </Route>
 
           <Route exact path="/login">
