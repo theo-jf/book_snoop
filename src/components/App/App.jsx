@@ -13,6 +13,7 @@ import Home from '../Home/Home';
 import SearchPage from '../SearchPage/SearchPage';
 import MapInfo from '../MapInfo/MapInfo';
 import EditionsList from '../SearchPage/EditionsList';
+import Profile from '../Profile/Profile';
 
 import Header from '../Nav/Header';
 import Footer from '../Footer/Footer';
@@ -89,13 +90,16 @@ function App() {
             {user.id ?
             // If the user is already logged in,  
             // redirect them to the /user page
-            <Redirect to="/user" />
+            <Redirect to="/profile" />
             : 
             // Otherwise, show the registration page
             <RegisterPage /> 
             } 
           </Route>
 
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
 
           <Route exact path="/search">
             <SearchPage />

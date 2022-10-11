@@ -1,0 +1,29 @@
+.profile {
+    padding: 50px;
+    padding-top: 0%;
+    display:  block;
+}
+
+.profileNav {
+    display: inline-block;
+}
+
+.profileMainView {
+    display: inline-block;
+}
+
+#libraryNav {
+    color: black;
+}
+
+#libraryNav:hover {
+    cursor: pointer;
+}
+
+#wishlistNav {
+    color: gray;
+}
+
+#wishlistNav:hover {
+    cursor: pointer;
+}
