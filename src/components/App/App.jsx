@@ -13,7 +13,7 @@ import SearchPage from '../SearchPage/SearchPage';
 import MapInfo from '../MapInfo/MapInfo';
 import EditionsList from '../SearchPage/EditionsList';
 
-import Nav from '../Nav/Nav';
+import Header from '../Nav/Header';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -39,7 +39,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
+        <Header />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/home" to="/search" />
@@ -67,37 +67,41 @@ function App() {
             {/* <InfoPage /> */}
           {/* </ProtectedRoute> */}
 
-          {/* <Route exact path="/login"> */}
-            {/* {user.id ? */}
-              {/* // If the user is already logged in,  */}
-              {/* // redirect to the /user page */}
-              {/* <Redirect to="/user" /> */}
-              {/* : */}
-              {/* // Otherwise, show the login page */}
-              {/* <LoginPage /> */}
-            {/* } */}
-          {/* </Route> */}
-
-          {/* <Route exact path="/registration"> */}
-            {/* {user.id ? */}
-              {/* // If the user is already logged in,  */}
-              {/* // redirect them to the /user page */}
-              {/* <Redirect to="/user" /> */}
-              {/* : */}
-              {/* // Otherwise, show the registration page */}
-              {/* <RegisterPage /> */}
-            {/* } */}
-          {/* </Route> */}
 
           <Route exact path="/home">
             {/* *** Put home search bar here *** */}
 
           </Route>
+
+          <Route exact path="/login">
+            {user.id ?
+            // If the user is already logged in,  
+            // redirect to the /profile page
+            <Redirect to="/profile" />
+            : 
+            // Otherwise, show the login page
+            <LoginPage />
+            }
+          </Route>
+
+          <Route exact path="/registration">
+            {user.id ?
+            // If the user is already logged in,  
+            // redirect them to the /user page
+            <Redirect to="/user" />
+            : 
+            // Otherwise, show the registration page
+            <RegisterPage /> 
+            } 
+          </Route>
+
+
           <Route exact path="/search">
             <SearchPage />
           </Route>
 
           <Route path="/search/editions/:bookNumber">
+            {/* Further sort/search functionality within editions?? */}
             <EditionsList />
           </Route>
 
@@ -108,6 +112,7 @@ function App() {
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
+            <p>Something went wrong!</p>
           </Route>
         </Switch>
         <Footer />

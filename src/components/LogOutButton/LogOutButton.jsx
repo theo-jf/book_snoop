@@ -3,13 +3,21 @@ import { useDispatch } from 'react-redux';
 
 function LogOutButton(props) {
   const dispatch = useDispatch();
+
+  const confirmLogout = () => {
+    if (confirm('Are you sure you want to logout?')) {
+      dispatch({ type: 'LOGOUT' });
+    }
+
+  }
+
   return (
     <button
       // This button shows up in multiple locations and is styled differently
       // because it's styled differently depending on where it is used, the className
       // is passed to it from it's parents through React props
       className={props.className}
-      onClick={() => dispatch({ type: 'LOGOUT' })}
+      onClick={confirmLogout}
     >
       Log Out
     </button>
