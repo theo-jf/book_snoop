@@ -97,9 +97,9 @@ function App() {
             } 
           </Route>
 
-          <Route exact path="/profile">
+          <ProtectedRoute exact path="/profile">
             <Profile />
-          </Route>
+          </ProtectedRoute>
 
           <Route exact path="/search">
             <SearchPage />
