@@ -32,7 +32,8 @@ export default function SearchPage() {
                 <option value="q">everything</option>
             </select>
             <button onClick={submitQuery}>Search</button>
-            {searchResults.map((result, i) => {
+            {searchResults.length === 0 ? <p>Finding books, this may take a second...</p>
+            : searchResults.map((result, i) => {
                 return (
                     <div key={i} className="SearchResultsItem">
                         <SearchResultsItem result={result}/>
