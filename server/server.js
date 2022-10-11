@@ -13,6 +13,8 @@ const userRouter = require('./routes/user.router');
 const searchRouter = require('./routes/search.router');
 const editionsRouter = require('./routes/editions.router');
 const addressRouter = require('./routes/address.router') ;
+const librariesRouter = require('./routes/libraries.router');
+const wishlistsRouter = require('./routes/wishlists.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +33,8 @@ app.use('/api/user', userRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/editions', editionsRouter);
 app.use('/api/addresses', addressRouter);
+app.use('/api/library', librariesRouter);
+app.use('/api/wishlist', wishlistsRouter);
 
 // Serve static files
 app.use(express.static('build'));

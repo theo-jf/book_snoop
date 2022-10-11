@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchLibrary() {
     try {
-        const library = axios.get('api/library');
+        const library = axios.get('/api/library');
         yield put ({
             type: 'SET_LIBRARY',
             payload: library.data
@@ -16,7 +16,7 @@ function* fetchLibrary() {
 
 function* fetchWishlist() {
     try {
-        const wishlist = axios.get('api/wishlist');
+        const wishlist = axios.get('/api/wishlist');
         yield put ({
             type: 'SET_WISHLIST',
             payload: wishlist.data
