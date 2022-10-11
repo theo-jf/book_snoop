@@ -13,11 +13,27 @@ export default function Home() {
 
     const [searchInput, setSearchInput] = useState('');
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && searchInput != '') {
+            goToSearch();
+        }
+    }
+
+    const goToSearch = () => {
+        dispatch({
+            type: 'SAGA_SEARCH_BOOKS',
+            payload: {searchType: 'title', query: searchInput}
+        });
+        history.push('/search');
+        setSearchInput('');
+    }
+
     return (
         <div className="home">
             <h1>Book Snoop</h1>
-            <input />
-            <button>Search</button>
+            <input onChange={(e) => setSearchInput(e.target.value)}
+                   onKeyDown={(e) => handleKeyDown(e)} />
+            <button onClick={goToSearch}>Search</button>
         </div>
     );
 }
