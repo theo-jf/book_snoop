@@ -4,7 +4,7 @@
 // Default profile view contains the library component
 
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import LogOutButton from "../LogOutButton/LogOutButton";
 
@@ -14,11 +14,20 @@ export default function Profile() {
 
     const userInfo = useSelector(store => store.user);
 
+    const dispatch = useDispatch();
+
     const [inLibrary, setInLibrary] = useState(true);
     const [inWishlist, setInWishList] = useState(false);
     
     // Fetch library and wishlist info on profile load
-
+    useEffect(() => {
+        dispatch({
+            type: 'SAGA_FETCH_USER_LIBRARY'
+        })
+        dispatch({
+            type: 'SAGA_FETCH_USER_WISHLIST'
+        })
+    }, [])
 
     const seeLibrary = () => {
         setInLibrary(true);
