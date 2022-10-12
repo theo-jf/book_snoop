@@ -16,8 +16,10 @@ import './Profile.css';
 export default function Profile() {
 
     const userInfo = useSelector(store => store.user);
-    const library = useSelector(store => store.profileReducers.library);
-    const wishlist = useSelector(store => store.profileReducers.wishlist);
+
+    // You might need to pass these as props ... we shall see
+    // const library = useSelector(store => store.profileReducers.library);
+    // const wishlist = useSelector(store => store.profileReducers.wishlist);
 
     const dispatch = useDispatch();
 
@@ -66,7 +68,7 @@ export default function Profile() {
             <div className="profileMainView">
                 {inLibrary && !inWishlist ? <h2>Library</h2> : <h2>Wishlist</h2>}
                 <div className="profileMainViewSection">
-                    {inLibrary && !inWishlist ? <Library library={library} /> : <Wishlist wishlist={wishlist} />}
+                    {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
                 </div>
             </div>
         </div>
