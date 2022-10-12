@@ -4,12 +4,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import EditLibraryItemLocation from "./EditLibraryItemLocation";
+
 export default function LibraryItem({libraryItem}) {
 
     const dispatch = useDispatch();
 
     const [inLocationEditView, setInLocationEditView] = useState(false);
-    const [location, setLocation] = useState(libraryItem.googleMaps_placeId);
 
     const goToEditView = () => {
         setInLocationEditView(true);
@@ -23,19 +24,10 @@ export default function LibraryItem({libraryItem}) {
         });
     }
 
-    const updateLocation = () => {
-        // Send updated location
-        setInEditView(false);
-        dispatch({
-            type: 'SAGA_UPDATE_LIBRARY_LOCATION',
-            payload: {id: libraryItem.id, location: location}
-        })
-    }
-
     const deleteLibraryItem = () => {
         // Confirm with user, then send delete request
         if(confirm('Delete from library?')){
-            setInEditView(false);
+            setInLocationEditView(false);
             dispatch({
                 type: 'SAGA_DELETE_LIBRARY_ITEM',
                 payload: libraryItem.id
@@ -60,8 +52,9 @@ export default function LibraryItem({libraryItem}) {
                 <option value="P">Poor</option>
             </select>
             <p>{libraryItem.condition} condition</p>
-            {inLocationEditView ? <p><input onChange={(e) => setLocation(e.target.value)} value={location} /> <button onClick={updateLocation}>Save Changes</button></p> 
+            {inLocationEditView ? <EditLibraryItemLocation setInLocationEditView={setInLocationEditView} libraryItem={libraryItem} />
                                 : <p>Found at {libraryItem.googleMaps_placeId} <button onClick={goToEditView}>Edit Location</button></p>}
+            <button onClick={deleteLibraryItem}>Delete From Library</button>
         </div>
     );
 }

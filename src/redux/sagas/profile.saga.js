@@ -53,7 +53,7 @@ function* updateLibraryLocation(action) {
 
 function* deleteLibraryItem(action) {
     try {
-        yield axios.delete(`/api/library/${action.payload.id}`);
+        yield axios.delete(`/api/library/${action.payload}`);
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'
         });

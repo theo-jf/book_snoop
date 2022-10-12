@@ -11,8 +11,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     sqlText = `SELECT 
                     saved_books.*,
                     libraries.*,
-                    addresses.name,
-                    addresses."googleMaps_placeId"
+                    addresses.*
                 FROM "libraries"
                     JOIN "saved_books" ON libraries.book_id = saved_books.id
                     JOIN "addresses" ON libraries.address_id = addresses.id
