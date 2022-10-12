@@ -6,6 +6,9 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+// Component imports
+import Library from "./Library/Library";
+import Wishlist from "./Wishlist/Wishlist";
 import LogOutButton from "../LogOutButton/LogOutButton";
 
 import './Profile.css';
@@ -31,6 +34,7 @@ export default function Profile() {
         })
     }, [])
 
+    // Turns library button to 'selected' color, all others to unselected 
     const seeLibrary = () => {
         setInLibrary(true);
         setInWishList(false);
@@ -40,6 +44,7 @@ export default function Profile() {
         wishlistNav.style.color = 'gray';
     }
 
+    // Turns wishlist button to 'selected' color, all others to unselected 
     const seeWishlist = () => {
         setInWishList(true);
         setInLibrary(false);
@@ -60,6 +65,9 @@ export default function Profile() {
             </div>
             <div className="profileMainView">
                 {inLibrary && !inWishlist ? <h2>Library</h2> : <h2>Wishlist</h2>}
+                <div className="profileMainViewSection">
+                    {inLibrary && !inWishlist ? <Library library={library} /> : <Wishlist wishlist={wishlist} />}
+                </div>
             </div>
         </div>
     );
