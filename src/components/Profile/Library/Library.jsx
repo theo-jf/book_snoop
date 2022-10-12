@@ -6,14 +6,17 @@ import LibraryItem from "./LibraryItem";
 
 import './Library.css'
 
-export default function({library}) {
+export default function Library() {
 
     const library = useSelector(store => store.profileReducers.library);
 
     return (
         <>
         {library.map((libraryItem) => {
-            <LibraryItem key={libraryItem.id} libraryItem={libraryItem} />
+            {console.log(libraryItem)}
+            return (
+                <LibraryItem key={libraryItem.id} libraryItem={libraryItem} />
+            );
         })}
         </>
     );

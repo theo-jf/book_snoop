@@ -2,7 +2,7 @@
 
 import { useSelector, useDispatch } from "react-redux";
 
-export default function({wishlist}) {
+export default function Wishlist() {
 
     const wishlist = useSelector(store => store.profileReducers.wishlist);
 
