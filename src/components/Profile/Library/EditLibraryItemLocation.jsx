@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 
 export default function EditLibraryItemLocation({setInLocationEditView, libraryItem}) {
 
+    const key = process.env.REACT_APP_API_KEY;
+
     const dispatch = useDispatch();
 
     // On load, fetch the address info associated with this saved book
@@ -47,8 +49,8 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
                 width="500"
                 height="400"
                 referrerPolicy="no-referrer-when-downgrade"
-                src={changesMade && location != '' ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyCd2EX_Yf13vpP4o8cz0Z7rd9vTy0uswZ4&q=${location}`
-                                 : `https://www.google.com/maps/embed/v1/place?key=AIzaSyCd2EX_Yf13vpP4o8cz0Z7rd9vTy0uswZ4&q=place_id:${libraryItem.googleMaps_placeId === '' ? 'ChIJvbt3k5Azs1IRB-56L4TJn5M' 
+                src={changesMade && location != '' ? `https://www.google.com/maps/embed/v1/place?key=${key}&q=${location}`
+                                 : `https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${libraryItem.googleMaps_placeId === '' ? 'ChIJvbt3k5Azs1IRB-56L4TJn5M' 
                                                                                                                                                                               : libraryItem.googleMaps_placeId}`}
                 allowFullScreen>
             </iframe>

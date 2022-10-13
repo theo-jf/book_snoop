@@ -34,6 +34,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "nodemon": "^2.0.4"
   },
   "browserslist": [
