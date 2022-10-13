@@ -20,7 +20,7 @@ export default function LibraryItem({libraryItem}) {
         let newCondition = e.target.value;
         dispatch({
             type: 'SAGA_UPDATE_LIBRARY_CONDITION',
-            payload: {id: libraryItem.id, condition: newCondition}
+            payload: {id: libraryItem.library_id, condition: newCondition}
         });
     }
 
@@ -30,7 +30,7 @@ export default function LibraryItem({libraryItem}) {
             setInLocationEditView(false);
             dispatch({
                 type: 'SAGA_DELETE_LIBRARY_ITEM',
-                payload: libraryItem.id
+                payload: libraryItem.library_id
             });
         }
     }

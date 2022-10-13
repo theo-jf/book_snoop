@@ -29,7 +29,7 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
         // First, confirm location
         dispatch({
             type: 'SAGA_SET_NEW_ADDRESS',
-            payload: {id: libraryItem.id, query: location}
+            payload: {id: libraryItem.library_id, query: location}
         })
 
         // Send updated location

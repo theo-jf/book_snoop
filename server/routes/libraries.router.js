@@ -9,6 +9,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     // ••• This route is forbidden if not logged in •••
     // Get a user's library
     sqlText = `SELECT 
+                    libraries.id AS library_id,
                     saved_books.*,
                     libraries.*,
                     addresses.*
@@ -39,7 +40,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             const sqlText = `UPDATE "libraries"
                                 SET "condition" = $1
                                 WHERE "id" = $2
-                                AND "user_id" =$3;`
+                                AND "user_id" = $3;`
             pool.query(sqlText, [newCondition, req.params.id, req.user.id])       
                 .then((results) => {
                     res.sendStatus(200);
@@ -61,12 +62,25 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
                             ("name", "street_address", "city", "state", "zip", "googleMaps_placeId")
                             VALUES
                             ($1, $2, $3, $4, $5, $6)
-                            RETURNING id;`
+                            RETURNING "id";`
 
         pool.query(sqlText, [location.name, location.street_address, location.city, location.state, location.zip, location.googleMaps_placeId])       
             .then((results) => {
                 // Use the results to get the new address id, then update the library entry
-                console.log('RESULTS IN NEW ADDY', results.rows);
+                console.log('RESULTS IN NEW ADDY', results.rows[0].id);
+                const addressId = results.rows[0].id;
+                const sqlText = `UPDATE "libraries"
+                                    SET "address_id" = $1
+                                    WHERE "id" = $2;`
+
+                pool.query(sqlText, [addressId, req.params.id])
+                .then(results => {
+                    res.sendStatus(200);
+                })
+                .catch(error => {
+                    console.log('Error in PUT /api/library update libraries query using new address id', error);
+                    res.sendStatus(500);
+                })
             })
             .catch((error) => {
                 // In catch -> get the existing address id to use
@@ -88,7 +102,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
                                 res.sendStatus(200);
                             })
                             .catch(error => {
-                                console.log('Error in PUT /api/library update libraries query with existing address id', error);
+                                console.log('Error in PUT /api/library update libraries query using existing address id', error);
                                 res.sendStatus(500);
                             })
                     })
