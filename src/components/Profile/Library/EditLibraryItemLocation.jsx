@@ -26,18 +26,17 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
 
     const saveUpdatedLocation = () => {
 
-        // First, confirm location
-        dispatch({
-            type: 'SAGA_SET_NEW_ADDRESS',
-            payload: {id: libraryItem.library_id, query: location}
-        })
-
-        // Send updated location
-        setInLocationEditView(false);
-        // dispatch({
-        //     type: 'SAGA_UPDATE_LIBRARY_LOCATION',
-        //     payload: {id: libraryItem.id, location: location}
-        // })
+        // Confirm new string has been entered
+        // **** In the server route, make queries without cities in them default to user area ***
+        if (location != '') {
+            dispatch({
+                type: 'SAGA_SET_NEW_ADDRESS',
+                payload: {id: libraryItem.library_id, query: location}
+            })
+            setInLocationEditView(false);
+        } else if (location === '') {
+            discardChanges();
+        }
     }
 
     return (
