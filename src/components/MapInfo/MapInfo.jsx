@@ -7,6 +7,8 @@ import './MapInfo.css'
 
 export default function MapInfo({setMapPageActive}) {
 
+    const key = process.env.REACT_APP_API_KEY;
+
     const dispatch = useDispatch();
 
     const exitDetails = () => {
@@ -24,8 +26,6 @@ export default function MapInfo({setMapPageActive}) {
     // For now, Minneapolis is the default view
     const [addressPlaceId, setAddressPlaceId] = useState('ChIJvbt3k5Azs1IRB-56L4TJn5M');
 
-    // const api_key = process.env.API_KEY;
-
 
     return (
         <>
@@ -42,7 +42,7 @@ export default function MapInfo({setMapPageActive}) {
                 width="500"
                 height="400"
                 referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCd2EX_Yf13vpP4o8cz0Z7rd9vTy0uswZ4&q=place_id:${addressPlaceId}`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${addressPlaceId}`}
                 allowFullScreen>
             </iframe>
         </>
