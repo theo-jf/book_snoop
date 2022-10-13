@@ -29,6 +29,7 @@ function* fetchWishlist() {
 
 function* updateLibraryCondition(action) {
     try {
+        console.log('UPDATING CONDITION', action.payload)
         yield axios.put(`/api/library/${action.payload.id}`, action.payload);
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'
@@ -41,7 +42,7 @@ function* updateLibraryCondition(action) {
 
 function* updateLibraryLocation(action) {
     try {
-        yield axios.put(`/api/library/${action.payload.id}`, action.payload);
+        yield axios.put(`/api/library/${action.payload.newAddressObject.updateId}`, action.payload);
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'
         });

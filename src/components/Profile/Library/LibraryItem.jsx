@@ -53,7 +53,7 @@ export default function LibraryItem({libraryItem}) {
             </select>
             <p>{libraryItem.condition} condition</p>
             {inLocationEditView ? <EditLibraryItemLocation setInLocationEditView={setInLocationEditView} libraryItem={libraryItem} />
-                                : <p>Found at {libraryItem.googleMaps_placeId} <button onClick={goToEditView}>Edit Location</button></p>}
+                                : <p>Found at {libraryItem.name} in {libraryItem.city}, {libraryItem.state} <button onClick={goToEditView}>Edit Location</button></p>}
             <button onClick={deleteLibraryItem}>Delete From Library</button>
         </div>
     );

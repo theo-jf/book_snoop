@@ -33,13 +33,14 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     // ••• This route is forbidden if not logged in •••
     // If condition has been sent 
     if (req.body.condition) {
+        const newCondition = req.body.condition;
         // Update library item condition if sent condition matches accepted condition value
-        if (req.body === 'F' || req.body === 'NF' || req.body === 'VG' || req.body === 'G' || req.body === 'FR' || req.body === 'P') {
+        if (newCondition === 'F' || newCondition === 'NF' || newCondition === 'VG' || newCondition === 'G' || newCondition === 'FR' || newCondition === 'P') {
             const sqlText = `UPDATE "libraries"
                                 SET "condition" = $1
                                 WHERE "id" = $2
                                 AND "user_id" =$3;`
-            pool.query(sqlText, [req.body.condition, req.params.id, req.user.id])       
+            pool.query(sqlText, [newCondition, req.params.id, req.user.id])       
                 .then((results) => {
                     res.sendStatus(200);
                 })
@@ -51,9 +52,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             // If non-matching condition, send back 304 Not Modified
             res.sendStatus(304);
         }
-    } else if (req.body.location) { // If location has been sent
+    } else if (req.body.newAddressObject) { // If location has been sent
 
-        const location = req.body.location
+        const location = req.body.newAddressObject;
 
         // First, attempt to insert the address into the address table assuming it's new
         const sqlText = `INSERT INTO "addresses"
@@ -65,6 +66,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         pool.query(sqlText, [location.name, location.street_address, location.city, location.state, location.zip, location.googleMaps_placeId])       
             .then((results) => {
                 // Use the results to get the new address id, then update the library entry
+                console.log('RESULTS IN NEW ADDY', results.rows);
             })
             .catch((error) => {
                 // In catch -> get the existing address id to use
@@ -75,9 +77,24 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
                 pool.query(sqlText, [location.googleMaps_placeId])
                     .then((results) => {
                         // Use the results to get the existing address id, then update the library entry
+                        console.log('RESULTS IN NEED USE OLD ADDY', results.rows[0].id);
+                        const addressId = results.rows[0].id;
+                        const sqlText = `UPDATE "libraries"
+                                            SET "address_id" = $1
+                                            WHERE "id" = $2;`
+                        
+                        pool.query(sqlText, [addressId, req.params.id])
+                            .then(results => {
+                                res.sendStatus(200);
+                            })
+                            .catch(error => {
+                                console.log('Error in PUT /api/library update libraries query with existing address id', error);
+                                res.sendStatus(500);
+                            })
                     })
                     .catch((error) => {
-                        console.log('Error in PUT /api/library query, could not fetch existing address id', error)
+                        console.log('Error in PUT /api/library query, could not fetch existing address id', error);
+                        res.sendStatus(500);
                     })
             });     
     }

@@ -17,13 +17,21 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
     const changeLocation = (e) => {
         setLocation(e.target.value);
         setChangesMade(true);
+        // Call Saga function to update new location reducer with maps api
     }
 
     const discardChanges = () => {
         setInLocationEditView(false);
     }
 
-    const updateLocation = () => {
+    const saveUpdatedLocation = () => {
+
+        // First, confirm location
+        dispatch({
+            type: 'SAGA_SET_NEW_ADDRESS',
+            payload: {id: libraryItem.id, query: location}
+        })
+
         // Send updated location
         setInLocationEditView(false);
         // dispatch({
@@ -41,10 +49,11 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
                 height="400"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={changesMade && location != '' ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyCd2EX_Yf13vpP4o8cz0Z7rd9vTy0uswZ4&q=${location}`
-                                 : `https://www.google.com/maps/embed/v1/place?key=AIzaSyCd2EX_Yf13vpP4o8cz0Z7rd9vTy0uswZ4&q=place_id:${libraryItem.googleMaps_placeId === '' ? 'ChIJvbt3k5Azs1IRB-56L4TJn5M' : libraryItem.googleMaps_placeId}`}
+                                 : `https://www.google.com/maps/embed/v1/place?key=AIzaSyCd2EX_Yf13vpP4o8cz0Z7rd9vTy0uswZ4&q=place_id:${libraryItem.googleMaps_placeId === '' ? 'ChIJvbt3k5Azs1IRB-56L4TJn5M' 
+                                                                                                                                                                              : libraryItem.googleMaps_placeId}`}
                 allowFullScreen>
             </iframe>
-            <p><button onClick={discardChanges}>Discard Changes</button><button onClick={updateLocation}>Save Changes</button></p>
+            <p><button onClick={discardChanges}>Discard Changes</button><button onClick={saveUpdatedLocation}>Save This Address</button></p>
         </>
     );
 }
