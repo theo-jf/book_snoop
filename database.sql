@@ -35,9 +35,8 @@ CREATE TABLE "saved_books" (
 
 CREATE TABLE "addresses" (
     "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (255) UNIQUE NOT NULL,
-    "street_number" VARCHAR (255) NOT NULL,
-    "street_name" VARCHAR (255) NOT NULL,
+    "name" VARCHAR (255) NOT NULL,
+    "street_address" VARCHAR (255) NOT NULL,
     "city" VARCHAR (255) NOT NULL,
     "state" VARCHAR (255) NOT NULL,
     "zip" VARCHAR (16) NOT NULL,

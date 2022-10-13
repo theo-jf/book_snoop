@@ -24,7 +24,7 @@ export default function Header() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className="navLink" to="/user">
+            <Link className="navLink" to="/profile">
               Profile
             </Link>
 
