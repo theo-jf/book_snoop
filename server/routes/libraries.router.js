@@ -160,7 +160,7 @@ router.post('/fromwishlist', rejectUnauthenticated, async (req, res) => {
         // Confirm successful actions
         await connection.query('COMMIT;');
 
-        resizeTo.sendStatus(200);
+        res.sendStatus(200);
 
     } catch (error) {
         await connection.query('ROLLBACK;');
