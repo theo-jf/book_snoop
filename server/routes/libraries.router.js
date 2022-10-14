@@ -8,14 +8,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
     // ••• This route is forbidden if not logged in •••
     // Get a user's library
-    sqlText = `SELECT 
+    const sqlText = `SELECT 
                     libraries.id AS library_id,
                     saved_books.*,
                     libraries.*,
                     addresses.*
                 FROM "libraries"
                     JOIN "saved_books" ON libraries.book_id = saved_books.id
-                    JOIN "addresses" ON libraries.address_id = addresses.id
+                    LEFT JOIN "addresses" ON libraries.address_id = addresses.id
                         WHERE libraries.user_id = $1;`
 
     pool.query(sqlText, [req.user.id])
@@ -114,6 +114,61 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     }
 
 });
+
+router.post('/fromwishlist', rejectUnauthenticated, async (req, res) => {
+
+    // ••• This route is forbidden if not logged in •••
+
+    console.log('req.body:', req.body.id);
+
+    const wishlist_id = req.body.id;
+
+    const queryValues = [wishlist_id, req.user.id];
+
+    const sqlCreateText = `INSERT INTO "libraries"
+                                ("user_id", "book_id")
+                                VALUES
+                                (($1),
+                                (SELECT "book_id"
+                                    FROM "wishlists"
+                                        WHERE "id" = $2
+                                        AND user_id = $1));`
+
+    const sqlDeleteText = `DELETE FROM "wishlists"
+                                WHERE "id" = $1
+                                AND user_id = $2;`
+
+    const connection = await pool.connect();
+
+    // BEGIN TRANSACTION;
+    // INSERT INTO Table2 (<columns>)
+    // SELECT <columns>
+    // FROM Table1
+    // WHERE <condition>;
+
+    // DELETE FROM Table1
+    // WHERE <condition>;
+
+    // COMMIT;
+
+    try {
+        await connection.query('BEGIN;');
+
+        await connection.query(sqlCreateText, [req.user.id, req.body.id]);
+        await connection.query(sqlDeleteText, queryValues);
+
+        // Confirm successful actions
+        await connection.query('COMMIT;');
+
+        resizeTo.sendStatus(200);
+
+    } catch (error) {
+        await connection.query('ROLLBACK;');
+        console.log('Error in POST /api/library/fromwishlist', error)
+        res.sendStatus(500);
+    }
+
+})
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     

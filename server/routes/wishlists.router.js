@@ -8,7 +8,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
     // ••• This route is forbidden if not logged in •••
     // Get a user's wishlist
-    sqlText = `SELECT 
+    const sqlText = `SELECT 
+                    wishlists.id AS wishlist_id,
                     saved_books.*,
                     wishlists.*
                 FROM "wishlists"
@@ -25,6 +26,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 
 });
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+
+    // ••• This route is forbidden if not logged in •••
+    // Delete wishlist item
+    const sqlText = `DELETE FROM "wishlists"
+                        WHERE "id" = $1
+                        AND user_id = $2;`
+
+    pool.query(sqlText, [req.params.id, req.user.id])
+        .then((results) => {
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('Error in DELETE /api/wishlist query', error);
+            res.sendStatus(500);
+        });
+})
 
 
 module.exports = router;

@@ -64,10 +64,36 @@ function* deleteLibraryItem(action) {
     }
 }
 
+function* moveWishlistItemToLibrary(action) {
+    try {
+        yield axios.post('api/library/fromwishlist', {id: action.payload});
+        yield put({
+            type: 'SAGA_FETCH_USER_WISHLIST'
+        });
+    } catch (error) {
+        console.log(error);
+        alert('Error moving to library');
+    }
+}
+
+function* deleteWishlistItem(action) {
+    try {
+        yield axios.delete(`/api/wishlist/${action.payload}`);
+        yield put({
+            type: 'SAGA_FETCH_USER_WISHLIST'
+        });
+    } catch (error) {
+        console.log(error);
+        alert('Error deleting wishlist item');
+    }
+}
+
 export default function* profileSaga() {
     yield takeLatest('SAGA_FETCH_USER_LIBRARY', fetchLibrary);
     yield takeLatest('SAGA_FETCH_USER_WISHLIST', fetchWishlist);
     yield takeLatest('SAGA_UPDATE_LIBRARY_CONDITION', updateLibraryCondition);
     yield takeLatest('SAGA_UPDATE_LIBRARY_LOCATION', updateLibraryLocation);
     yield takeLatest('SAGA_DELETE_LIBRARY_ITEM', deleteLibraryItem);
+    yield takeLatest('SAGA_MOVE_TO_LIBRARY', moveWishlistItemToLibrary);
+    yield takeLatest('SAGA_DELETE_WISHLIST_ITEM', deleteWishlistItem);
 }

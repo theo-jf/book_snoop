@@ -1,6 +1,10 @@
 // Receives wishlist prop and displays a user's wishlist
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
+import WishlistItem from "./WishlistItem";
+
+import './Wishlist.css';
 
 export default function Wishlist() {
 
@@ -9,7 +13,9 @@ export default function Wishlist() {
     return (
         <>
         {wishlist.map((wishlistItem) => {
-            
+            return (
+                <WishlistItem key={wishlistItem.wishlist_id} wishlistItem={wishlistItem} />
+            );
         })}
         </>
     );
