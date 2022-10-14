@@ -9,6 +9,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     // ••• This route is forbidden if not logged in •••
     // Get a user's wishlist
     sqlText = `SELECT 
+                    wishlists.id AS wishlist_id,
                     saved_books.*,
                     wishlists.*
                 FROM "wishlists"
