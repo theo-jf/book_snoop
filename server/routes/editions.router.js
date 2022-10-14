@@ -48,19 +48,6 @@ router.get('/', (req, res) => {
         }
       }
 
-      // for (i = 0; i < editionsArray.length; i++) {
-      //   for (j = 0; j < (editionsArray.length - i - 1); j++) {
-      //     let compare1 = (editionsArray[j].publish_date)?.slice(-4);
-      //     let compare2 = (editionsArray[j + 1].publish_date)?.slice(-4);
-      //     console.log(compare1, compare2)
-      //     if (Number(compare1) > Number(compare2)) {
-      //       let temporary = editionsArray[j];
-      //       editionsArray[j] = editionsArray[j + 1];
-      //       editionsArray[j + 1] = temporary;
-      //     }
-      //   }
-      // }
-
       editionsArray.sort(compare);
 
       res.send(editionsArray);
