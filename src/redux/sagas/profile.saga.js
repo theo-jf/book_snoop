@@ -66,7 +66,7 @@ function* deleteLibraryItem(action) {
 
 function* moveWishlistItemToLibrary(action) {
     try {
-        yield axios.post('api/library/fromwishlist', action.payload);
+        yield axios.post('api/library/fromwishlist', {id: action.payload});
         yield put({
             type: 'SAGA_FETCH_USER_WISHLIST'
         });

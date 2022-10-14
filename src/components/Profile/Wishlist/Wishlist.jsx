@@ -14,7 +14,7 @@ export default function Wishlist() {
         <>
         {wishlist.map((wishlistItem) => {
             return (
-                <WishlistItem wishlistItem={wishlistItem} />
+                <WishlistItem key={wishlistItem.wishlist_id} wishlistItem={wishlistItem} />
             );
         })}
         </>
