@@ -8,7 +8,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
     // ••• This route is forbidden if not logged in •••
     // Get a user's library
-    sqlText = `SELECT 
+    const sqlText = `SELECT 
                     libraries.id AS library_id,
                     saved_books.*,
                     libraries.*,
@@ -114,6 +114,56 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     }
 
 });
+
+router.post('/fromwishlist', rejectUnauthenticated, async (req, res) => {
+
+    // ••• This route is forbidden if not logged in •••
+
+    const wishlist_id = req.body;
+
+    const queryValues = [wishlist_id, req.user.id];
+
+    const sqlCreateText = `INSERT INTO "libraries"
+                                ("user_id", "book_id")
+                                    SELECT ("user_id", "book_id")
+                                        FROM "wishlists"
+                                        WHERE "id" = $1
+                                        AND user_id = $2;`
+
+    const sqlDeleteText = `DELETE FROM "wishlists"
+                                WHERE "id" = $1
+                                AND user_id = $2;`
+
+    const connection = await pool.connect();
+
+    // BEGIN TRANSACTION;
+    // INSERT INTO Table2 (<columns>)
+    // SELECT <columns>
+    // FROM Table1
+    // WHERE <condition>;
+
+    // DELETE FROM Table1
+    // WHERE <condition>;
+
+    // COMMIT;
+
+    try {
+        await connection.query('BEGIN;');
+
+        await connection.query(sqlCreateText, queryValues);
+        await connection.query(sqlDeleteText, queryValues);
+
+        // Confirm successful actions
+        await connection.query('COMMIT;');
+
+        resizeTo.sendStatus(200);
+
+    } catch (error) {
+        await connection.query('ROLLBACK;');
+        res.sendStatus(500);
+    }
+
+})
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     
