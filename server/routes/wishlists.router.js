@@ -14,7 +14,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                     wishlists.*
                 FROM "wishlists"
                     JOIN "saved_books" ON wishlists.book_id = saved_books.id
-                        WHERE wishlists.user_id = $1;`
+                        WHERE wishlists.user_id = $1
+                        ORDER BY wishlists.id;`
 
     pool.query(sqlText, [req.user.id])
         .then((results) => {

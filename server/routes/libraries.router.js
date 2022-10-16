@@ -16,7 +16,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 FROM "libraries"
                     JOIN "saved_books" ON libraries.book_id = saved_books.id
                     LEFT JOIN "addresses" ON libraries.address_id = addresses.id
-                        WHERE libraries.user_id = $1;`
+                        WHERE libraries.user_id = $1
+                        ORDER BY libraries.id;`
 
     pool.query(sqlText, [req.user.id])
         .then((results) => {

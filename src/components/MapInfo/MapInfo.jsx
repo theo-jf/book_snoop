@@ -32,11 +32,12 @@ export default function MapInfo({setMapPageActive}) {
             <h1>MAP SURPRISE</h1>
             <button onClick={exitDetails}>X</button>
             <div>
-                {addresses.map(address => {
+                {addresses.length != 0 ? 
+                addresses.map(address => {
                     return (
                         <AddressItem key={address.id} setAddressPlaceId={setAddressPlaceId} address={address}/>
                     );
-                })}
+                }) : <p>No users have saved address information on this edition</p> }
             </div>
             <iframe
                 width="500"

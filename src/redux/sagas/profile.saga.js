@@ -70,6 +70,9 @@ function* moveWishlistItemToLibrary(action) {
         yield put({
             type: 'SAGA_FETCH_USER_WISHLIST'
         });
+        yield put({
+            type: 'SAGA_FETCH_USER_LIBRARY'
+        })
     } catch (error) {
         console.log(error);
         alert('Error moving to library');

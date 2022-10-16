@@ -19,8 +19,8 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         isbn: edition.isbn_10[0] || edition.isbn_13[0],
                         edition: edition.edition,
                         cover: edition.physical_format,
-                        publisher: edition.publishers[0],
-                        year: edition.publish_date || edition.publish_date[0]
+                        publisher: edition.publishers[0] || '',
+                        year: edition.publish_date || edition?.publish_date[0] || ''
                     }
         });
         setJustAddedToLibrary(true);
@@ -34,9 +34,9 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         author: edition.author,
                         isbn: edition.isbn_10[0] || edition.isbn_13[0],
                         edition: edition.edition,
-                        cover: edition.physical_format,
-                        publisher: edition.publishers[0],
-                        year: edition.publish_date || edition.publish_date[0]
+                        cover: edition.physical_format || '',
+                        publisher: edition.publishers[0] || '',
+                        year: edition.publish_date || edition?.publish_date[0] || ''
                      }
         });
         setJustAddedToWishlist(true);

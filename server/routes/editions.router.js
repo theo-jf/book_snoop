@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
           }
           
           // Then, compare
-          console.log(compareA, compareB)
+          // console.log(compareA, compareB)
           if (compareA < compareB){
             return -1;
           }
