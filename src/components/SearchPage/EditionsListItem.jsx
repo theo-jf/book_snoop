@@ -12,10 +12,10 @@ export default function EditionsListItem({edition, setMapPageActive}) {
             payload: {
                         title: edition.title,
                         author: edition.author,
-                        isbn: edition.isbn_10 || edition.isbn_13,
+                        isbn: edition.isbn_10[0] || edition.isbn_13[0],
                         edition: edition.edition,
                         cover: edition.physical_format,
-                        publisher: edition.publishers,
+                        publisher: edition.publishers[0],
                         year: edition.publish_date
                     }
         });
@@ -27,10 +27,10 @@ export default function EditionsListItem({edition, setMapPageActive}) {
             payload: {
                         title: edition.title,
                         author: edition.author,
-                        isbn: edition.isbn_10 || edition.isbn_13,
+                        isbn: edition.isbn_10[0] || edition.isbn_13[0],
                         edition: edition.edition,
                         cover: edition.physical_format,
-                        publisher: edition.publishers,
+                        publisher: edition.publishers[0],
                         year: edition.publish_date
                      }
         });

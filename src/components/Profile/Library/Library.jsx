@@ -15,7 +15,7 @@ export default function Library() {
         {library.map((libraryItem) => {
             {console.log(libraryItem)}
             return (
-                <LibraryItem key={libraryItem.id} libraryItem={libraryItem} />
+                <LibraryItem key={libraryItem.library_id} libraryItem={libraryItem} />
             );
         })}
         </>

@@ -57,7 +57,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     try {
         await connection.query('BEGIN;');
 
-        const bookId = await connection.query(sqlTryText, [bookToAdd.title, 
+        const tryResults = await connection.query(sqlTryText, [bookToAdd.title, 
                                                            bookToAdd.author, 
                                                            bookToAdd.isbn, 
                                                            bookToAdd.edition, 
@@ -65,7 +65,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                                                            bookToAdd.publisher,
                                                            bookToAdd.year]);
 
-        await connection.query(sqlCreateText, [userId, bookId]);
+        await connection.query(sqlCreateText, [userId, tryResults.rows[0].id]);
 
         // Confirm successful actions
         await connection.query('COMMIT;');
@@ -82,9 +82,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
             await connection.query('BEGIN;');
 
-            const bookId = await connection.query(sqlCatchText, [bookToAdd.isbn]);
+            const catchResults = await connection.query(sqlCatchText, [bookToAdd.isbn]);
 
-            await connection.query(sqlCreateText, [userId, bookId]);
+            await connection.query(sqlCreateText, [userId, catchResults.rows[0].id]);
 
             await connection.query('COMMIT;');
 
