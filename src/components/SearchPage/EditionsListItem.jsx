@@ -16,7 +16,7 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         edition: edition.edition,
                         cover: edition.physical_format,
                         publisher: edition.publishers[0],
-                        year: edition.publish_date
+                        year: edition.publish_date || edition.publish_date[0]
                     }
         });
     }
@@ -31,7 +31,7 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         edition: edition.edition,
                         cover: edition.physical_format,
                         publisher: edition.publishers[0],
-                        year: edition.publish_date
+                        year: edition.publish_date || edition.publish_date[0]
                      }
         });
     }
@@ -43,7 +43,8 @@ export default function EditionsListItem({edition, setMapPageActive}) {
         // Get addresses associated with this book's isbn
         dispatch({
             type: 'SAGA_FETCH_ADDRESSES',
-            payload: edition.isbn_13
+            payload: edition.isbn_13[0] || edition.isbn_13[0] || 
+                     edition.isbn_13 || edition.isbn_10
         })
     }
 

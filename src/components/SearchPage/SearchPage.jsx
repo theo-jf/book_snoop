@@ -7,16 +7,20 @@ export default function SearchPage() {
     const dispatch = useDispatch();
 
     const searchResults = useSelector(store => store.searchResults);
+    const queryFromHome = useSelector(store => store.queryFromHome);
 
-    const [query, setQuery] = useState('');
-    const [searchType, setSearchType] = useState('title')
+    const [query, setQuery] = useState(queryFromHome);
+    const [searchType, setSearchType] = useState('title');
 
     const submitQuery = () => {
         // Send query string and search type (title, author, none) to saga function
         dispatch({
             type: 'SAGA_SEARCH_BOOKS',
             payload: {searchType: searchType, query: query}
-        })
+        });
+        dispatch({
+            type: 'CLEAR_QUERY_FROM_HOME'
+        });
     }
 
     return (

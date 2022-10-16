@@ -30,7 +30,7 @@ CREATE TABLE "saved_books" (
     "edition" VARCHAR (255),
     "cover" VARCHAR (255),
     "publisher" VARCHAR (255),
-    "year" INT
+    "year" VARCHAR (255)
 );
 
 CREATE TABLE "addresses" (
