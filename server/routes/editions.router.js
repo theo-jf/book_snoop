@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 
     axios.get(`https://openlibrary.org/works/${workRoute}/editions.json`)
     .then((editions => {
-      console.log('?????', editions.data.entries);
+      // console.log('?????', editions.data.entries);
 
       let editionsArray = editions.data.entries;
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; 
 
 export default function EditionsListItem({edition, setMapPageActive}) {
@@ -5,6 +6,9 @@ export default function EditionsListItem({edition, setMapPageActive}) {
     const dispatch = useDispatch();
 
     const user = useSelector(store => store.user);
+
+    const [justAddedToLibrary, setJustAddedToLibrary] = useState(false);
+    const [justAddedToWishlist, setJustAddedToWishlist] = useState(false);
 
     const addToLibrary = () => {
         dispatch({
@@ -19,6 +23,7 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         year: edition.publish_date || edition.publish_date[0]
                     }
         });
+        setJustAddedToLibrary(true);
     }
 
     const addToWishlist = () => {
@@ -34,6 +39,7 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         year: edition.publish_date || edition.publish_date[0]
                      }
         });
+        setJustAddedToWishlist(true);
     }
 
     // Show maps page popup
@@ -57,8 +63,8 @@ export default function EditionsListItem({edition, setMapPageActive}) {
             <p>{edition?.publish_date}</p>
             {/* <button>add to wishlist</button>
             <button>add to library</button> */}
-            {user.id ? <><button onClick={addToLibrary}>Add To Library</button>
-                       <button onClick={addToWishlist}>Add To Wishlist</button></>
+            {user.id ? <><button onClick={addToLibrary}>{justAddedToLibrary ? 'Add Another Copy To Library' : 'Add To Library'}</button>
+                       <button onClick={addToWishlist}>{justAddedToWishlist ? 'Add Another Copy To Wishlist' : 'Add To Wishlist'}</button></>
                      : null}
             <button onClick={seeMore}>See More</button>
         </div>
