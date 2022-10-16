@@ -25,14 +25,14 @@ export default function EditionsListItem({edition, setMapPageActive}) {
         dispatch({
             type: 'SAGA_ADD_TO_WISHLIST',
             payload: {
-                title: edition.title,
-                author: edition.author,
-                isbn: edition.isbn_10 || edition.isbn_13,
-                edition: edition.edition,
-                cover: edition.physical_format,
-                publisher: edition.publishers,
-                year: edition.publish_date
-            }
+                        title: edition.title,
+                        author: edition.author,
+                        isbn: edition.isbn_10 || edition.isbn_13,
+                        edition: edition.edition,
+                        cover: edition.physical_format,
+                        publisher: edition.publishers,
+                        year: edition.publish_date
+                     }
         });
     }
 

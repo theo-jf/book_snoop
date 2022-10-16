@@ -115,6 +115,78 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
 });
 
+router.post('/', rejectUnauthenticated, async (req, res) => {
+
+    // ••• This route is forbidden if not logged in •••
+
+    const bookToAdd = req.body;
+
+    const userId = req.user.id;
+
+    // First, try to add the book to the the saved_books table
+    sqlTryText = `INSERT INTO "saved_books"
+                    ("title", "author", "isbn", "edition", "cover", "publisher", "year")
+                    VALUES
+                    ($1, $2, $3, $4, $5, $6, $7)
+                    RETURNING "id";`
+
+    // If insert error (book already saved), just get the existing id
+    sqlCatchText = `SELECT "id" FROM "saved_books"
+                        WHERE "isbn" = $1;`  
+                        
+    // Query to create the user's library entry
+    sqlCreateText = `INSERT INTO "libraries"
+                        ("user_id", "book_id")
+                        VALUES
+                        ($1, $2);`
+
+    const connection = await pool.connect();
+
+    try {
+        await connection.query('BEGIN;');
+
+        const bookId = await connection.query(sqlTryText, [bookToAdd.title, 
+                                                           bookToAdd.author, 
+                                                           bookToAdd.isbn, 
+                                                           bookToAdd.edition, 
+                                                           bookToAdd.cover, 
+                                                           bookToAdd.publisher,
+                                                           bookToAdd.year]);
+
+        await connection.query(sqlCreateText, [userId, bookId]);
+
+        // Confirm successful actions
+        await connection.query('COMMIT;');
+
+        res.sendStatus(201);
+
+    } catch (error) {
+        // No need for rollback? Unless you don't want to save a book that fails to add to user library
+        await connection.query('ROLLBACK;');
+
+        console.log('Error adding book to library, likely already exists in saved_books', error);
+
+        try {
+
+            await connection.query('BEGIN;');
+
+            const bookId = await connection.query(sqlCatchText, [bookToAdd.isbn]);
+
+            await connection.query(sqlCreateText, [userId, bookId]);
+
+            await connection.query('COMMIT;');
+
+            res.sendStatus(201);
+
+        } catch (error) {
+            console.log('Error in /api/library query adding existing book to library', error)
+            res.sendStatus(500);
+        }
+
+    }
+    
+});
+
 router.post('/fromwishlist', rejectUnauthenticated, async (req, res) => {
 
     // ••• This route is forbidden if not logged in •••
