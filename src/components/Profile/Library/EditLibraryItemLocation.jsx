@@ -50,8 +50,9 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
                 height="400"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={changesMade && location != '' ? `https://www.google.com/maps/embed/v1/place?key=${key}&q=${location}`
-                                 : `https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${libraryItem.googleMaps_placeId === '' ? 'ChIJvbt3k5Azs1IRB-56L4TJn5M' 
-                                                                                                                                                                              : libraryItem.googleMaps_placeId}`}
+                                                   : `https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${libraryItem.googleMaps_placeId === '' || 
+                                                                                                                        libraryItem. googleMaps_placeId === null ? 'ChIJvbt3k5Azs1IRB-56L4TJn5M' 
+                                                                                                                                                                 : libraryItem.googleMaps_placeId}`}
                 allowFullScreen>
             </iframe>
             <p><button onClick={discardChanges}>Discard Changes</button><button onClick={saveUpdatedLocation}>Save This Address</button></p>

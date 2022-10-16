@@ -24,6 +24,10 @@ export default function Home() {
             type: 'SAGA_SEARCH_BOOKS',
             payload: {searchType: 'title', query: searchInput}
         });
+        dispatch({
+            type: 'SET_QUERY_FROM_HOME',
+            payload: searchInput
+        });
         history.push('/search');
         setSearchInput('');
     }

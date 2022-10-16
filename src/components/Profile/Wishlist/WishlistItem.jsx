@@ -15,7 +15,7 @@ export default function WishlistItem({wishlistItem}) {
         dispatch({
             type: 'SAGA_MOVE_TO_LIBRARY',
             payload: wishlistItem.wishlist_id
-        })
+        });
     }
 
     const deleteWishlistItem = () => {
