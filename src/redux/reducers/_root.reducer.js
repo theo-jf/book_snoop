@@ -7,6 +7,7 @@ import searchResults from './searchResults.reducer';
 import editionsResults from './editionsResults.reducer';
 import addresses from './addresses.reducer';
 import profileReducers from './profile.reducer';
+import queryFromHome from './queryFromHome.reducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   searchResults,
   editionsResults,
   addresses,
-  profileReducers
+  profileReducers,
+  queryFromHome
 });
 
 export default rootReducer;
