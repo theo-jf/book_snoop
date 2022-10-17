@@ -1,4 +1,5 @@
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 
 // MUI Imports
 import Grid from "@mui/material/Grid";
@@ -6,16 +7,16 @@ import CardContent from "@mui/material/CardContent";
 
 export default function SearchResultsItem({result}) {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const viewEditions = () => {
 
         // Save current author of editions being viewed
         //      Since editions API cannot send Author names
-        dispatchEvent({
+        dispatch({
             type: 'SET_CURRENT_AUTHOR',
-            payload: result.author_name
+            payload: result.author_name[0]
         });
 
         // Reduce key to just OpenLibrary book number

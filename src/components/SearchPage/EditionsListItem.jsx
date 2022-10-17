@@ -10,18 +10,19 @@ export default function EditionsListItem({edition, setMapPageActive}) {
     const dispatch = useDispatch();
 
     const user = useSelector(store => store.user);
-    const currenAuthor = useSelector(store => store.currenAuthor);
+    const currenAuthor = useSelector(store => store.currentAuthor);
 
     const [justAddedToLibrary, setJustAddedToLibrary] = useState(false);
     const [justAddedToWishlist, setJustAddedToWishlist] = useState(false);
 
     const addToLibrary = () => {
+        console.log('CURRENT AUTHOR', currenAuthor)
         dispatch({
             type: 'SAGA_ADD_TO_LIBRARY',
             payload: {
                         title: edition.title,
                         author: currenAuthor,
-                        isbn: edition.isbn_10[0] || edition.isbn_13[0],
+                        isbn: edition.isbn_13[0] || edition.isbn_10[0],
                         edition: edition.edition,
                         cover: edition.physical_format,
                         publisher: edition.publishers[0] || '',
@@ -37,7 +38,7 @@ export default function EditionsListItem({edition, setMapPageActive}) {
             payload: {
                         title: edition.title,
                         author: currenAuthor,
-                        isbn: edition.isbn_10[0] || edition.isbn_13[0],
+                        isbn: edition.isbn_13[0] || edition.isbn_10[0],
                         edition: edition.edition,
                         cover: edition.physical_format || '',
                         publisher: edition.publishers[0] || '',
