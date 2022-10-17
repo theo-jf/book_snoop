@@ -1,0 +1,28 @@
+.resultsPageSearchBar {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.searchResultsContainer {
+    text-align: center;
+}
+
+.searchResultCover {
+    min-height: 258px;
+}
+
+.searchResultCover:hover {
+    cursor: pointer;
+}
+
+.searchResultsItem {
+    padding-left: 10px;
+    min-height: 400px;
+}
+
+.searchResultContent {
+    background-color:rgb(232, 229, 229);
+    border-radius: 50px;
+}

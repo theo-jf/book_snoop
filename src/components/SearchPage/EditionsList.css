@@ -17,11 +17,41 @@
     background-color: beige;
 }
 
-
 .popupHidden {
     visibility: hidden;
 }
 
+.editionsContainer {
+    text-align: center;
+}
+
 .editionsListItem {
     padding-left: 10px;
+    min-height: 400px;
+}
+
+.editionContent {
+    background-color:rgb(232, 229, 229);
+    border-radius: 50px;
+    /* z-index: 0; */
+}
+
+/* .editionCover {
+    background-color: rgb(0, 255, 255);
+} */
+
+.coverContainer {
+    min-height: 258px;
+    position: relative;
+    text-align: center;
+    color: black;
+    z-index: 0;
+}
+
+.noCoverText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
 }

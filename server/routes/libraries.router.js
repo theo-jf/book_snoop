@@ -126,9 +126,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     // First, try to add the book to the the saved_books table
     sqlTryText = `INSERT INTO "saved_books"
-                    ("title", "author", "isbn", "edition", "cover", "publisher", "year")
+                    ("title", "author", "isbn", "cover", "publisher", "year")
                     VALUES
-                    ($1, $2, $3, $4, $5, $6, $7)
+                    ($1, $2, $3, $4, $5, $6)
                     RETURNING "id";`
 
     // If insert error (book already saved), just get the existing id
@@ -149,7 +149,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const tryResults = await connection.query(sqlTryText, [bookToAdd.title, 
                                                            bookToAdd.author, 
                                                            bookToAdd.isbn, 
-                                                           bookToAdd.edition, 
                                                            bookToAdd.cover, 
                                                            bookToAdd.publisher,
                                                            bookToAdd.year]);
