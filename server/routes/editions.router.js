@@ -48,7 +48,15 @@ router.get('/', (req, res) => {
         }
       }
 
+      // only send editions with an isbn
+      function checkForIsbn (edition) {
+        if (edition.isbn_10 || edition.isbn_13) {
+          return edition
+        }
+      }
+
       editionsArray.sort(compare);
+      editionsArray = editionsArray.filter(checkForIsbn);
 
       res.send(editionsArray);
     }))

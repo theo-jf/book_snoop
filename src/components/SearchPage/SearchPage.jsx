@@ -2,6 +2,15 @@ import SearchResultsItem from "./SearchResultsItem";
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './SearchPage.css';
+
+// MUI imports
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+
 export default function SearchPage() {
 
     const dispatch = useDispatch();
@@ -25,17 +34,21 @@ export default function SearchPage() {
 
     return (
         <div className="SearchResults">
-            <input
-                placeholder="title, author, isbn..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)} 
-            />
-            <select onChange={(e) => setSearchType(e.target.value)}>
-                <option default value="title">title</option>
-                <option value="author">author</option>
-                <option value="q">everything</option>
-            </select>
-            <button onClick={submitQuery}>Search</button>
+            <div className="resultsPageSearchBar">
+                <TextField
+                    placeholder="title, author, isbn..."
+                    size="small"
+                    style={{width: "80%"}}
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)} 
+                />
+                <Select size="small" value={searchType} style={{width: "8%", marginLeft: "10px"}} onChange={(e) => setSearchType(e.target.value)}>
+                    <MenuItem default value="title">title</MenuItem>
+                    <MenuItem value="author">author</MenuItem>
+                    <MenuItem value="q">everything</MenuItem>
+                </Select>
+                <Button onClick={submitQuery}>Search</Button>
+            </div>
             {searchResults.length === 0 ? <p>Finding books, this may take a second...</p>
             : searchResults.map((result, i) => {
                 return (
