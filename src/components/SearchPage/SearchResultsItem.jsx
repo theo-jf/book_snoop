@@ -1,5 +1,9 @@
 import { useHistory } from "react-router";
 
+// MUI Imports
+import Grid from "@mui/material/Grid";
+import CardContent from "@mui/material/CardContent";
+
 export default function SearchResultsItem({result}) {
 
     // const dispatch = useDispatch();
@@ -14,10 +18,15 @@ export default function SearchResultsItem({result}) {
     }
 
     return (
-        <>
-            <img onClick={viewEditions} src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg`} />
-            <p>title: {result?.title}, author: {result?.author_name}</p>
-            <button onClick={viewEditions}>{`View ${result?.edition_key?.length} Editions`}</button>
-        </>
+        <Grid className="searchResultsItem" item xs={6} sm={4} md={3} lg={2}>
+            <CardContent className="searchResultContent">
+                <div className="coverContainer">
+                    <img className="searchResultCover" onClick={viewEditions} src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg`} />
+                    <div className="noCoverText">image not available</div>
+                </div>
+                <p>title: {result?.title}, author: {result?.author_name}</p>
+                <button onClick={viewEditions}>{`View ${result?.edition_key?.length} Editions`}</button>
+            </CardContent>
+        </Grid>
     );
 }

@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import Grid from "@mui/material/Grid";
 
 export default function SearchPage() {
 
@@ -49,14 +49,16 @@ export default function SearchPage() {
                 </Select>
                 <Button onClick={submitQuery}>Search</Button>
             </div>
-            {searchResults.length === 0 ? <p>Finding books, this may take a second...</p>
-            : searchResults.map((result, i) => {
-                return (
-                    <div key={i} className="SearchResultsItem">
-                        <SearchResultsItem result={result}/>
-                    </div>
-                );
-            })}
+            <div className="searchResultsContainer">
+                <Grid justifyContent="space-evenly" container rowSpacing={5} columnSpacing={5}>
+                    {searchResults.length === 0 ? <p>Finding books, this may take a second...</p>
+                    : searchResults.map((result, i) => {
+                        return (
+                            <SearchResultsItem key={i} result={result}/>
+                        );
+                    })}
+                </Grid>
+            </div>
         </div>
     );
 }
