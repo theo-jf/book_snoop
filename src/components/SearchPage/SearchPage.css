@@ -13,6 +13,10 @@
     min-height: 258px;
 }
 
+.searchResultCover:hover {
+    cursor: pointer;
+}
+
 .searchResultsItem {
     padding-left: 10px;
     min-height: 400px;

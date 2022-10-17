@@ -11,6 +11,13 @@ export default function SearchResultsItem({result}) {
 
     const viewEditions = () => {
 
+        // Save current author of editions being viewed
+        //      Since editions API cannot send Author names
+        dispatchEvent({
+            type: 'SET_CURRENT_AUTHOR',
+            payload: result.author_name
+        });
+
         // Reduce key to just OpenLibrary book number
         const bookNumber = result.key.split('/')[2];
         // Go to editions
@@ -24,7 +31,8 @@ export default function SearchResultsItem({result}) {
                     <img className="searchResultCover" onClick={viewEditions} src={`https://covers.openlibrary.org/b/olid/${result.cover_edition_key}-M.jpg`} />
                     <div className="noCoverText">image not available</div>
                 </div>
-                <p>title: {result?.title}, author: {result?.author_name}</p>
+                <p>{result?.title}</p> 
+                <p>by {result?.author_name}</p>
                 <button onClick={viewEditions}>{`View ${result?.edition_key?.length} Editions`}</button>
             </CardContent>
         </Grid>

@@ -8,6 +8,7 @@ import editionsResults from './editionsResults.reducer';
 import addresses from './addresses.reducer';
 import profileReducers from './profile.reducer';
 import queryFromHome from './queryFromHome.reducer';
+import currentAuthor from './currentAuthor.reducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   editionsResults,
   addresses,
   profileReducers,
-  queryFromHome
+  queryFromHome,
+  currentAuthor
 });
 
 export default rootReducer;
