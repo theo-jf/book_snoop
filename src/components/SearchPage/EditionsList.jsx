@@ -25,10 +25,14 @@ export default function EditionsList() {
         console.log('editionResults!:', editionsResults)
 
         // Clear editions reducer upon leaving
+        // Clear current author upon leaving
         return () => {
             dispatch({
                 type: 'CLEAR_EDITIONS_RESULTS'
-            })
+            });
+            dispatch({
+                type: 'CLEAR_CURRENT_AUTHOR'
+            });
         }
 
     }, [params.bookNumber]);
