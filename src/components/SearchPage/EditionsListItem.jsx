@@ -23,7 +23,6 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         title: edition.title,
                         author: currenAuthor,
                         isbn: edition.isbn_13[0] || edition.isbn_10[0],
-                        edition: edition.edition,
                         cover: edition.physical_format,
                         publisher: edition.publishers[0] || '',
                         year: edition.publish_date || edition?.publish_date[0] || ''
@@ -39,7 +38,6 @@ export default function EditionsListItem({edition, setMapPageActive}) {
                         title: edition.title,
                         author: currenAuthor,
                         isbn: edition.isbn_13[0] || edition.isbn_10[0],
-                        edition: edition.edition,
                         cover: edition.physical_format || '',
                         publisher: edition.publishers[0] || '',
                         year: edition.publish_date || edition?.publish_date[0] || ''

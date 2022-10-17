@@ -27,7 +27,6 @@ CREATE TABLE "saved_books" (
     "title" VARCHAR (255),
     "author" VARCHAR (255),
     "isbn" VARCHAR (255) UNIQUE NOT NULL,
-    "edition" VARCHAR (255),
     "cover" VARCHAR (255),
     "publisher" VARCHAR (255),
     "year" VARCHAR (255)
