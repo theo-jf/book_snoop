@@ -51,7 +51,7 @@ export default function SearchPage() {
             </div>
             <div className="searchResultsContainer">
                 <Grid justifyContent="space-evenly" container rowSpacing={5} columnSpacing={5}>
-                    {searchResults.length === 0 ? <p>Finding books, this may take a second...</p>
+                    {searchResults.length === 0 && queryFromHome != '' ? <p>Finding books, this may take a second...</p>
                     : searchResults.map((result, i) => {
                         return (
                             <SearchResultsItem key={i} result={result}/>

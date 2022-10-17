@@ -22,8 +22,6 @@ export default function EditionsList() {
             payload: params.bookNumber
         });
 
-        console.log('editionResults!:', editionsResults)
-
         // Clear editions reducer upon leaving
         // Clear current author upon leaving
         return () => {

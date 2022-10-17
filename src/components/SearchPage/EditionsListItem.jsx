@@ -10,19 +10,19 @@ export default function EditionsListItem({edition, setMapPageActive}) {
     const dispatch = useDispatch();
 
     const user = useSelector(store => store.user);
-    const currenAuthor = useSelector(store => store.currentAuthor);
+    const currentAuthor = useSelector(store => store.currentAuthor);
 
     const [justAddedToLibrary, setJustAddedToLibrary] = useState(false);
     const [justAddedToWishlist, setJustAddedToWishlist] = useState(false);
 
     const addToLibrary = () => {
-        console.log('CURRENT AUTHOR', currenAuthor)
+        console.log('CURRENT AUTHOR', currentAuthor)
         dispatch({
             type: 'SAGA_ADD_TO_LIBRARY',
             payload: {
                         title: edition.title,
-                        author: currenAuthor,
-                        isbn: edition.isbn_13[0] || edition.isbn_10[0],
+                        author: currentAuthor,
+                        isbn: (edition.isbn_13 ? edition.isbn_13[0] : edition.isbn_10[0]),
                         cover: edition.physical_format,
                         publisher: edition.publishers[0] || '',
                         year: edition.publish_date || edition?.publish_date[0] || ''
@@ -36,8 +36,8 @@ export default function EditionsListItem({edition, setMapPageActive}) {
             type: 'SAGA_ADD_TO_WISHLIST',
             payload: {
                         title: edition.title,
-                        author: currenAuthor,
-                        isbn: edition.isbn_13[0] || edition.isbn_10[0],
+                        author: currentAuthor,
+                        isbn: (edition.isbn_13 ? edition.isbn_13[0] : edition.isbn_10[0]),
                         cover: edition.physical_format || '',
                         publisher: edition.publishers[0] || '',
                         year: edition.publish_date || edition?.publish_date[0] || ''
@@ -53,7 +53,7 @@ export default function EditionsListItem({edition, setMapPageActive}) {
         // Get addresses associated with this book's isbn
         dispatch({
             type: 'SAGA_FETCH_ADDRESSES',
-            payload: edition.isbn_13[0] || edition.isbn_13[0] || 
+            payload: edition.isbn_13[0] || edition.isbn_10[0] || 
                      edition.isbn_13 || edition.isbn_10
         })
     }
