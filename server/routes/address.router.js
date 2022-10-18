@@ -20,41 +20,23 @@ router.get('/', (req, res) => {
     pool.query(sqlText, [editionIsbn])
         .then((results) => {
 
+            let conditionLookup = {
+                'F': 'fine',
+                'NF': 'near fine',
+                'VG': 'very good',
+                'G': 'good',
+                'FR': 'fair',
+                'P': 'poor'
+            }
+
             let editions = results.rows;
 
             // Change condition values to their associated string words
-            for (let edition of editions) {
-                switch (edition.most_common_condition) {
-                    case 'F':
-                        edition.most_common_condition = 'fine';
-                        break;
+            editions = editions.map(edition => {
+               return {...edition, most_common_condition: conditionLookup[edition.most_common_condition]}
+            });
 
-                    case 'NF':
-                        edition.most_common_condition = 'near fine';
-                        break;
-
-                    case 'VG':
-                        edition.most_common_condition = 'very good';
-                        break;
-
-                    case 'G':
-                        edition.most_common_condition = 'good';
-                        break;
-
-                    case 'FR':
-                        edition.most_common_condition = 'fair';
-                        break;
-
-                    case 'P':
-                        edition.most_common_condition = 'poor';
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            res.send(results.rows);
+            res.send(editions);
         })
         .catch((error) => {
             console.log('Error in GET /api/addresses query', error)

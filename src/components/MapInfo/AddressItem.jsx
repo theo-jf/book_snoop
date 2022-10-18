@@ -1,3 +1,7 @@
+// MUI Imports
+import Grid from "@mui/material/Grid";
+import CardContent from "@mui/material/CardContent";
+
 export default function AddressItem({address, setAddressPlaceId}) {
 
     const setMap = () => {
@@ -5,9 +9,15 @@ export default function AddressItem({address, setAddressPlaceId}) {
     }
 
     return (
-        <div onClick={setMap} className="address">
-            <p>{address.name}, {address.city} {address.state}</p>
-            <p>Found here {address.count} times in mostly {address.most_common_condition} condition</p>
-        </div>
+        <Grid className="addressItem" item xs={12} sm={6} md={4} lg={3}>
+            <CardContent onClick={setMap} className="address">
+                <p>{address.name}</p> 
+                <p>{address.city} {address.state}</p>
+                <p className="addressStatistics">
+                    Found here {address.count == 1 ? 'once' 
+                                                   : `${address.count} times`} in mostly {address.most_common_condition} condition
+                </p>
+            </CardContent>
+        </Grid>
     );
 }

@@ -3,7 +3,10 @@ import { useState } from "react";
 
 import AddressItem from "./AddressItem";
 
-import './MapInfo.css'
+import './MapInfo.css';
+
+// MUI Imports
+import Grid from "@mui/material/Grid";
 
 export default function MapInfo({setMapPageActive}) {
 
@@ -29,23 +32,25 @@ export default function MapInfo({setMapPageActive}) {
 
     return (
         <>
-            <h1>MAP SURPRISE</h1>
-            <button onClick={exitDetails}>X</button>
-            <div>
-                {addresses.length != 0 ? 
-                addresses.map(address => {
-                    return (
-                        <AddressItem key={address.id} setAddressPlaceId={setAddressPlaceId} address={address}/>
-                    );
-                }) : <p>No users have saved address information on this edition</p> }
-            </div>
+            <p className="mapsTitle">{addresses.length} locations found</p>
+            <button className="closeMapButton" onClick={exitDetails}>x</button>
             <iframe
+                className="map"
                 width="90%"
                 height="60%"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${addressPlaceId}`}
                 allowFullScreen>
             </iframe>
+            <Grid className="addressListGrid" overflow='auto' justifyContent="space-evenly" alignContent="center" container rowSpacing={5} columnSpacing={5}>
+                {addresses.length != 0 ?
+                addresses.map(address => {
+                    return (
+                        <AddressItem key={address.id} setAddressPlaceId={setAddressPlaceId} address={address}/>
+                    );
+                }) : <p className="noLocationData">No users have saved address information on this edition</p> }
+
+            </Grid>
         </>
     );
 }

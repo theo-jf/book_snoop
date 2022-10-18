@@ -1,3 +1,51 @@
+.mapsTitle {
+    margin: 15px;
+}
+
+/* .noLocationData {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+} */
+
 .address {
     cursor: pointer;
+    background-color: rgb(232, 232, 232);
+    width: 100%;
+}
+
+.closeMapButton {
+    font-size: 30px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    margin: 0;
+    border-radius: 5px;
+}
+
+.closeMapButton:hover {
+    cursor: pointer;
+    transition: 0.9s;
+    background-color: #00000015;
+}
+
+.map {
+    margin-bottom: 50px;
+}
+
+.addressItem {
+    text-align: left;
+}
+
+.addressListGrid {
+    height: 25%;
+    padding-left: 45px;
+    margin-right: 50px;
+    padding-top: -10px;
 }
