@@ -6,6 +6,7 @@ export default function AddressItem({address, setAddressPlaceId}) {
 
     return (
         <div onClick={setMap} className="address">
+            {console.log(address.item)}
             <p>{address.name}</p>
         </div>
     );

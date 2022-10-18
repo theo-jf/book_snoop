@@ -13,9 +13,16 @@ function* fetchEditions(action) {
             payload: editionsResults.data
         });
 
-        // Get author key of first edition result
-        const authorKey = editionsResults.data[0].authors[0].key;
-        const currentAuthor = yield axios.get(`https://openlibrary.org${authorKey}.json`);
+        let currentAuthor;
+        // Get author key of edition result
+        //  Sometimes the first result will not have a key, so looping is necessary
+        for (let edition of editionsResults.data) {
+            if (edition.authors) {
+                const authorKey = edition.authors[0].key;
+                currentAuthor = yield axios.get(`https://openlibrary.org${authorKey}.json`);
+                break;
+            }
+        }
 
         // Set current author
         yield  put ({
