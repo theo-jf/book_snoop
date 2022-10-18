@@ -19,6 +19,41 @@ router.get('/', (req, res) => {
 
     pool.query(sqlText, [editionIsbn])
         .then((results) => {
+
+            let editions = results.rows;
+
+            // Change condition values to their associated string words
+            for (let edition of editions) {
+                switch (edition.most_common_condition) {
+                    case 'F':
+                        edition.most_common_condition = 'fine';
+                        break;
+
+                    case 'NF':
+                        edition.most_common_condition = 'near fine';
+                        break;
+
+                    case 'VG':
+                        edition.most_common_condition = 'very good';
+                        break;
+
+                    case 'G':
+                        edition.most_common_condition = 'good';
+                        break;
+
+                    case 'FR':
+                        edition.most_common_condition = 'fair';
+                        break;
+
+                    case 'P':
+                        edition.most_common_condition = 'poor';
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
             res.send(results.rows);
         })
         .catch((error) => {
