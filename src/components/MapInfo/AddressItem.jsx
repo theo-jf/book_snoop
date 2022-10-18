@@ -6,8 +6,8 @@ export default function AddressItem({address, setAddressPlaceId}) {
 
     return (
         <div onClick={setMap} className="address">
-            {console.log(address.item)}
-            <p>{address.name}</p>
+            <p>{address.name}, {address.city} {address.state}</p>
+            {/* <p># Users have found this item here in mostly ~average~ condition</p> */}
         </div>
     );
 }

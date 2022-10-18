@@ -64,7 +64,7 @@ export default function EditionsListItem({edition, setMapPageActive}) {
         <Grid className="editionsListItem" item xs={6} sm={4} md={3} lg={2}>
             <CardContent className="editionContent">
                 <div className="coverContainer">
-                    <img className="editionCover" alt="image not available" src={`https://covers.openlibrary.org/b/isbn/${edition.isbn_10}-M.jpg`} />
+                    <img className="editionCover" alt="image not available" src={`https://covers.openlibrary.org/b/isbn/${(edition.isbn_13 ? edition.isbn_13 || edition.isbn_13[0] : edition.isbn_10 || edition.isbn_10)}-M.jpg`} />
                     <div className="noCoverText">image not available</div>
                 </div>
                 <p>isbn: {edition?.isbn_13 ? edition?.isbn_13 : edition?.isbn_10}</p>
