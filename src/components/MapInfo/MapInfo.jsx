@@ -40,8 +40,8 @@ export default function MapInfo({setMapPageActive}) {
                 }) : <p>No users have saved address information on this edition</p> }
             </div>
             <iframe
-                width="500"
-                height="400"
+                width="90%"
+                height="60%"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${addressPlaceId}`}
                 allowFullScreen>
