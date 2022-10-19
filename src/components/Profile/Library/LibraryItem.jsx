@@ -4,6 +4,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+// MUI Imports
+import Grid from "@mui/material/Grid";
+
 import EditLibraryItemLocation from "./EditLibraryItemLocation";
 
 export default function LibraryItem({libraryItem}) {
@@ -37,7 +40,7 @@ export default function LibraryItem({libraryItem}) {
 
     // ~Library Card~ :P
     return (        
-        <div className="libraryItem">
+        <Grid item xs={12} sm={6} md={3} lg={2} className="libraryItem">
             <img className="libraryItemImg" src={`https://covers.openlibrary.org/b/isbn/${libraryItem.isbn}-M.jpg`} />
             <p>{libraryItem.title}</p>
             <p>by {libraryItem.author}</p>
@@ -55,6 +58,6 @@ export default function LibraryItem({libraryItem}) {
             {inLocationEditView ? <EditLibraryItemLocation setInLocationEditView={setInLocationEditView} libraryItem={libraryItem} />
                                 : <p>Found at {libraryItem.name} in {libraryItem.city}, {libraryItem.state} <button onClick={goToEditView}>Edit Location</button></p>}
             <button onClick={deleteLibraryItem}>Delete From Library</button>
-        </div>
+        </Grid>
     );
 }

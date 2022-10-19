@@ -11,6 +11,10 @@ import Library from "./Library/Library";
 import Wishlist from "./Wishlist/Wishlist";
 import LogOutButton from "../LogOutButton/LogOutButton";
 
+// MUI Imports 
+import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
+
 import './Profile.css';
 
 export default function Profile() {
@@ -57,20 +61,20 @@ export default function Profile() {
     }
 
     return (
-        <div className="profile">
+        <Box sx={{ display: 'flex' }} className="profile">
             <div className="profileNav">
                 <img className="profileAvatar" />
-                <h2>{userInfo.username}</h2>
+                <h2 className="profileUsername">{userInfo.username}</h2>
                 <p id="libraryNav" onClick={seeLibrary}>library</p>
                 <p id="wishlistNav" onClick={seeWishlist}>wishlist</p>
                 {/* <LogOutButton /> */}
             </div>
             <div className="profileMainView">
                 {inLibrary && !inWishlist ? <h2>Library</h2> : <h2>Wishlist</h2>}
-                <div className="profileMainViewSection">
+                <Grid justifyContent="left" container rowSpacing={5} columnSpacing={5} className="profileMainViewSection">
                     {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
-                </div>
+                </Grid>
             </div>
-        </div>
+        </Box>
     );
 }

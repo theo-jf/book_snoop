@@ -4,6 +4,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+// MUI Imports
+import Grid from "@mui/material/Grid";
+
 export default function WishlistItem({wishlistItem}) {
 
     const dispatch = useDispatch();
@@ -29,7 +32,7 @@ export default function WishlistItem({wishlistItem}) {
 
     // If items has been moved to library, display a momentary visual indicator
     return (
-        <div className="wishlistItem">
+        <Grid item xs={12} sm={6} md={3} lg={2} className="wishlistItem">
             { movedToLibrary ? <p>Moved to library</p> 
                              : <>
                                     <img className="wishlistItemImg" src={`https://covers.openlibrary.org/b/isbn/${wishlistItem.isbn}-M.jpg`} />
@@ -40,6 +43,6 @@ export default function WishlistItem({wishlistItem}) {
                                     <button onClick={moveToLibrary}>Move To Library</button>
                                     <button onClick={deleteWishlistItem}>Delete From Wishlist</button> 
                                </>}
-        </div>
+        </Grid>
     );
 }

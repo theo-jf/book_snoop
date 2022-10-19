@@ -5,11 +5,28 @@
 }
 
 .profileNav {
-    display: inline-block;
+    display: inline;
+ 
+    height: 100%;
+    width: 150px;
+    position: sticky;
+    left: 0;
+    top: 0;
+    /* padding-top: 40px; */
+}
+
+.profileUsername {
+    margin-top: 0%;
+    margin-right: 50px;
 }
 
 .profileMainView {
-    display: inline-block;
+    /* display: inline-block; */
+
+    width: 500;
+    margin: 0;
+    padding: 0;
+    display: inline;     
 }
 
 #libraryNav {
