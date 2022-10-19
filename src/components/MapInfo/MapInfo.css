@@ -19,6 +19,11 @@
 
 .addressTitle {
     margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.addressInfo {
+    margin-bottom: 20px;
 }
 
 .closeMapButton {
@@ -53,6 +58,8 @@
     margin-bottom: 10px;
     margin-left: 5px;
     margin-right: 5px;
+    min-width: 257px;
+    width: 45%;
 }
 
 .addressListGrid {
@@ -68,4 +75,34 @@
 .none {
     padding-left: 45px;
     overflow: hidden;
+}
+
+.statCount {
+    font-weight: bold;
+}
+
+.poor {
+    color: rgb(198, 53, 53);
+}
+
+.fair {
+    color: rgb(177, 89, 35);
+}
+
+.good {
+    color: rgb(187, 172, 36);
+}
+
+/* class names will be 'very good' */
+.very {
+    color: rgb(114, 187, 36);
+}
+
+/* class names will be 'near fine' */
+.near {
+    color: rgb(36, 187, 157);
+}
+
+.fine {
+    color: rgb(36, 59, 187);   
 }

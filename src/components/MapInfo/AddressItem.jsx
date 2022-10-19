@@ -13,10 +13,14 @@ export default function AddressItem({address, setAddressPlaceId}) {
         <div className="addressItem">
             <CardContent onClick={setMap} className="address">
                 <h4 className="addressTitle">{address.name}</h4> 
-                <p>{address.city} {address.state}</p>
+                <p className="addressInfo">{address.city}, {address.state}</p>
                 <p className="addressStatistics">
-                    Found here {address.count == 1 ? 'once' 
-                                                   : `${address.count} times`} in mostly {address.most_common_condition} condition
+                    Found here {address.count == 1 ? <span className="statCount">once </span>
+                                                   : <span className="statCount">{address.count} times </span>} 
+                               {address.most_common_condition != undefined ? <>in {address.count == 1 ? null 
+                                                                                                       : 'mostly '} 
+                                                                             <span className={address.most_common_condition}>{address.most_common_condition}</span> condition</>
+                                                                           : null}
                 </p>
             </CardContent>
         </div>
