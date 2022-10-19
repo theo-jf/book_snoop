@@ -1,3 +1,113 @@
+.mapsTitle {
+    margin: 15px;
+}
+
+.noLocationData {
+    margin: 0;
+    padding: 10px;
+    /* padding-top: 0%; */
+}
+
 .address {
     cursor: pointer;
+    background-color: rgb(232, 232, 232);
+    margin: auto;
+    /* font-size: 80%; */
+    /* width: 90%; */
+    /* max-width: 30%; */
+}
+
+.addressTitle {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.addressInfo {
+    margin-bottom: 20px;
+}
+
+.closeMapButton {
+    font-size: 30px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    margin: 0;
+    border-radius: 5px;
+}
+
+.closeMapButton:hover {
+    cursor: pointer;
+    transition: 0.9s;
+    background-color: #00000015;
+}
+
+.map {
+    margin-bottom: 20px;
+}
+
+.addressItem {
+    text-align: left;
+    display: inline-block;
+    min-width: 30%;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    min-width: 257px;
+    width: 45%;
+}
+
+.addressListGrid {
+    height: 25%;
+    text-align: center;
+    overflow: scroll;
+    padding-right: 10px;
+    padding-left: 10px;
+    /* margin: auto; */
+    /* padding-top: -10px; */
+}
+
+.none {
+    padding-left: 45px;
+    overflow: hidden;
+}
+
+.statCount {
+    font-weight: bold;
+}
+
+.poor {
+    color: rgb(198, 53, 53);
+}
+
+.fair {
+    color: rgb(177, 89, 35);
+}
+
+.good {
+    color: rgb(187, 172, 36);
+}
+
+/* class names will be 'very good' */
+.very {
+    color: rgb(114, 187, 36);
+}
+
+/* class names will be 'near fine' */
+.near {
+    color: rgb(36, 187, 157);
+}
+
+.fine {
+    color: rgb(36, 59, 187);   
+}
+
+.highlighted {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: .5s;
 }

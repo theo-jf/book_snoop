@@ -3,7 +3,10 @@ import { useState } from "react";
 
 import AddressItem from "./AddressItem";
 
-import './MapInfo.css'
+import './MapInfo.css';
+
+// MUI Imports
+import Grid from "@mui/material/Grid";
 
 export default function MapInfo({setMapPageActive}) {
 
@@ -14,7 +17,7 @@ export default function MapInfo({setMapPageActive}) {
     const exitDetails = () => {
 
         setMapPageActive(false);
-        setAddressPlaceId('ChIJvbt3k5Azs1IRB-56L4TJn5M')
+        setAddressPlaceId('ChIJvbt3k5Azs1IRB-56L4TJn5M');
         
         dispatch({
             type: 'CLEAR_ADDRESSES'
@@ -23,29 +26,42 @@ export default function MapInfo({setMapPageActive}) {
 
     const addresses = useSelector(store => store.addresses);
 
-    // For now, Minneapolis is the default view
+    // If no addresses exist, default to Minneapolis view
     const [addressPlaceId, setAddressPlaceId] = useState('ChIJvbt3k5Azs1IRB-56L4TJn5M');
 
+    // Prop value to highlight selected address and remove highlight from others
+    const [highlightedAddressId, setHighlightedAddressId] = useState('')
 
     return (
         <>
-            <h1>MAP SURPRISE</h1>
-            <button onClick={exitDetails}>X</button>
-            <div>
-                {addresses.length != 0 ? 
-                addresses.map(address => {
-                    return (
-                        <AddressItem key={address.id} setAddressPlaceId={setAddressPlaceId} address={address}/>
-                    );
-                }) : <p>No users have saved address information on this edition</p> }
-            </div>
+            <p className="mapsTitle">{addresses.length} locations found</p>
+            <button className="closeMapButton" onClick={exitDetails}>x</button>
             <iframe
-                width="500"
-                height="400"
+                className="map"
+                width="90%"
+                height="60%"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${addressPlaceId}`}
                 allowFullScreen>
             </iframe>
+            {addresses.length != 0 ?
+            // FIX SCROLL ISSUE
+            // <Grid className="addressListGrid" overflow='auto' justifyContent="space-evenly" alignContent="center" container rowSpacing={5} columnSpacing={5}>
+            <div className="addressListGrid">
+                {addresses.map((address, i) => {
+                    return (
+                        <AddressItem key={address.id} 
+                                     highlightedAddressId={highlightedAddressId}
+                                     setHighlightedAddressId={setHighlightedAddressId}
+                                     setAddressPlaceId={setAddressPlaceId} 
+                                     address={address}
+                                     i={i}
+                        />
+                    );
+                })}
+            </div>
+            // </Grid> 
+            : <h4 className="noLocationData">No users have saved address information on this edition</h4>}
         </>
     );
 }
