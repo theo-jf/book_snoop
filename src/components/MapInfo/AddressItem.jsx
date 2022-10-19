@@ -18,8 +18,6 @@ export default function AddressItem({address, setAddressPlaceId, highlightedAddr
         setAddressPlaceId(address.googleMaps_placeId);
     }
 
-    console.log(highlightedAddressId)
-
     return (
         // <Grid className="addressItem" item xs={12} sm={6} md={4} lg={3}>
         <div className={(highlightedAddressId === address.id ? 'highlighted addressItem' : 'addressItem')} onClick={() => setHighlightedAddressId(address.id)}>
