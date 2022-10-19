@@ -11,6 +11,7 @@
     transform: translate(-50%, -50%);
     width: 90%;
     height: 90%;
+    /* min-height: 510px; */
     position: fixed;
     display: block;
     text-align: center;

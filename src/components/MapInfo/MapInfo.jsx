@@ -42,15 +42,18 @@ export default function MapInfo({setMapPageActive}) {
                 src={`https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${addressPlaceId}`}
                 allowFullScreen>
             </iframe>
-            <Grid className="addressListGrid" overflow='auto' justifyContent="space-evenly" alignContent="center" container rowSpacing={5} columnSpacing={5}>
-                {addresses.length != 0 ?
-                addresses.map(address => {
+            {addresses.length != 0 ?
+            // FIX SCROLL ISSUE
+            // <Grid className="addressListGrid" overflow='auto' justifyContent="space-evenly" alignContent="center" container rowSpacing={5} columnSpacing={5}>
+            <div className="addressListGrid">
+                {addresses.map(address => {
                     return (
                         <AddressItem key={address.id} setAddressPlaceId={setAddressPlaceId} address={address}/>
                     );
-                }) : <p className="noLocationData">No users have saved address information on this edition</p> }
-
-            </Grid>
+                })}
+            </div>
+            // </Grid> 
+            : <h4 className="noLocationData">No users have saved address information on this edition</h4>}
         </>
     );
 }

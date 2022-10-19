@@ -2,16 +2,23 @@
     margin: 15px;
 }
 
-/* .noLocationData {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-} */
+.noLocationData {
+    margin: 0;
+    padding: 10px;
+    /* padding-top: 0%; */
+}
 
 .address {
     cursor: pointer;
     background-color: rgb(232, 232, 232);
-    width: 100%;
+    margin: auto;
+    /* font-size: 80%; */
+    /* width: 90%; */
+    /* max-width: 30%; */
+}
+
+.addressTitle {
+    margin-top: 0%;
 }
 
 .closeMapButton {
@@ -36,16 +43,29 @@
 }
 
 .map {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .addressItem {
     text-align: left;
+    display: inline-block;
+    min-width: 30%;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .addressListGrid {
     height: 25%;
+    text-align: center;
+    overflow: scroll;
+    padding-right: 10px;
+    padding-left: 10px;
+    /* margin: auto; */
+    /* padding-top: -10px; */
+}
+
+.none {
     padding-left: 45px;
-    margin-right: 50px;
-    padding-top: -10px;
+    overflow: hidden;
 }
