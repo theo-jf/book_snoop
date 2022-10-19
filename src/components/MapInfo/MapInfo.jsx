@@ -17,7 +17,7 @@ export default function MapInfo({setMapPageActive}) {
     const exitDetails = () => {
 
         setMapPageActive(false);
-        setAddressPlaceId('ChIJvbt3k5Azs1IRB-56L4TJn5M')
+        setAddressPlaceId('ChIJvbt3k5Azs1IRB-56L4TJn5M');
         
         dispatch({
             type: 'CLEAR_ADDRESSES'
@@ -26,9 +26,11 @@ export default function MapInfo({setMapPageActive}) {
 
     const addresses = useSelector(store => store.addresses);
 
-    // For now, Minneapolis is the default view
+    // If no addresses exist, default to Minneapolis view
     const [addressPlaceId, setAddressPlaceId] = useState('ChIJvbt3k5Azs1IRB-56L4TJn5M');
 
+    // Prop value to highlight selected address and remove highlight from others
+    const [highlightedAddressId, setHighlightedAddressId] = useState('')
 
     return (
         <>
@@ -46,9 +48,15 @@ export default function MapInfo({setMapPageActive}) {
             // FIX SCROLL ISSUE
             // <Grid className="addressListGrid" overflow='auto' justifyContent="space-evenly" alignContent="center" container rowSpacing={5} columnSpacing={5}>
             <div className="addressListGrid">
-                {addresses.map(address => {
+                {addresses.map((address, i) => {
                     return (
-                        <AddressItem key={address.id} setAddressPlaceId={setAddressPlaceId} address={address}/>
+                        <AddressItem key={address.id} 
+                                     highlightedAddressId={highlightedAddressId}
+                                     setHighlightedAddressId={setHighlightedAddressId}
+                                     setAddressPlaceId={setAddressPlaceId} 
+                                     address={address}
+                                     i={i}
+                        />
                     );
                 })}
             </div>
