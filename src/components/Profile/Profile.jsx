@@ -11,9 +11,18 @@ import Library from "./Library/Library";
 import Wishlist from "./Wishlist/Wishlist";
 import LogOutButton from "../LogOutButton/LogOutButton";
 
+// MUI Imports 
+import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+
 import './Profile.css';
 
+const drawerWidth = 240;
+
 export default function Profile() {
+
 
     const userInfo = useSelector(store => store.user);
 
@@ -44,6 +53,7 @@ export default function Profile() {
         libraryNav.style.color = 'black';
         let wishlistNav = document.getElementById('wishlistNav');
         wishlistNav.style.color = 'gray';
+        window.scrollTo(0, 0);
     }
 
     // Turns wishlist button to 'selected' color, all others to unselected 
@@ -54,23 +64,28 @@ export default function Profile() {
         libraryNav.style.color = 'gray';
         let wishlistNav = document.getElementById('wishlistNav');
         wishlistNav.style.color = 'black';
+        window.scrollTo(0, 0);
     }
 
     return (
-        <div className="profile">
+        <Box sx={{ display: 'flex' }} className="profile">
             <div className="profileNav">
-                <img className="profileAvatar" />
-                <h2>{userInfo.username}</h2>
+                <div className="profileAvatarBorder">
+                    <img alt="profile picture here :)" src='' className="profileAvatar" />
+                </div>
+                <h2 className="profileUsername">{userInfo.username}</h2>
                 <p id="libraryNav" onClick={seeLibrary}>library</p>
                 <p id="wishlistNav" onClick={seeWishlist}>wishlist</p>
                 {/* <LogOutButton /> */}
             </div>
-            <div className="profileMainView">
-                {inLibrary && !inWishlist ? <h2>Library</h2> : <h2>Wishlist</h2>}
-                <div className="profileMainViewSection">
-                    {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
-                </div>
-            </div>
-        </div>
+            <Box id="topOfPage" className="profileMainView">
+                {inLibrary && !inWishlist ? <h2 className="profileMainViewTitle">Library</h2> : <h2 className="profileMainViewTitle">Wishlist</h2>}
+                <Box sx={{ flexGrow: 1 }}>
+                    <Grid justifyContent="left" container rowSpacing={5} columnSpacing={5} className="profileMainViewSection">
+                        {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
+                    </Grid>
+                </Box>
+            </Box>
+        </Box>
     );
 }

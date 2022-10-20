@@ -55,7 +55,7 @@ export default function MapInfo({setMapPageActive}) {
                                      setHighlightedAddressId={setHighlightedAddressId}
                                      setAddressPlaceId={setAddressPlaceId} 
                                      address={address}
-                                     i={i}
+                                     isFirstItem={i === 0}
                         />
                     );
                 })}
