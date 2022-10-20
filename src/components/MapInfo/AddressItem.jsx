@@ -3,12 +3,12 @@ import { useEffect } from "react";
 // MUI Imports
 import CardContent from "@mui/material/CardContent";
 
-export default function AddressItem({address, setAddressPlaceId, highlightedAddressId, setHighlightedAddressId, i}) {
+export default function AddressItem({address, setAddressPlaceId, highlightedAddressId, setHighlightedAddressId, isFirstItem}) {
 
     // If this is the first address in the list (first being mapped), 
     //      automatically pull up the map for this address and highlight this address item
     useEffect(() => {
-        if (i === 0) {
+        if (isFirstItem) {
             setHighlightedAddressId(address.id);
             setAddressPlaceId(address.googleMaps_placeId);
         }

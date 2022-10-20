@@ -70,7 +70,9 @@ export default function Profile() {
     return (
         <Box sx={{ display: 'flex' }} className="profile">
             <div className="profileNav">
-                <img className="profileAvatar" />
+                <div className="profileAvatarBorder">
+                    <img alt="profile picture here :)" src='' className="profileAvatar" />
+                </div>
                 <h2 className="profileUsername">{userInfo.username}</h2>
                 <p id="libraryNav" onClick={seeLibrary}>library</p>
                 <p id="wishlistNav" onClick={seeWishlist}>wishlist</p>
