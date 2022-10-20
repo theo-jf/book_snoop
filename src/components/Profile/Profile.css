@@ -26,7 +26,15 @@
     width: 500;
     margin: 0;
     padding: 0;
-    display: inline;     
+    display: inline;    
+}
+
+/* .profileMainViewTitle {
+    position: fixed;
+} */
+
+.profileMainViewSection {
+    margin-top: 50px;
 }
 
 #libraryNav {

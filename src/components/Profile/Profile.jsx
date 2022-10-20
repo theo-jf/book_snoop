@@ -14,10 +14,15 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 // MUI Imports 
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 
 import './Profile.css';
 
+const drawerWidth = 240;
+
 export default function Profile() {
+
 
     const userInfo = useSelector(store => store.user);
 
@@ -48,6 +53,7 @@ export default function Profile() {
         libraryNav.style.color = 'black';
         let wishlistNav = document.getElementById('wishlistNav');
         wishlistNav.style.color = 'gray';
+        window.scrollTo(0, 0);
     }
 
     // Turns wishlist button to 'selected' color, all others to unselected 
@@ -58,6 +64,7 @@ export default function Profile() {
         libraryNav.style.color = 'gray';
         let wishlistNav = document.getElementById('wishlistNav');
         wishlistNav.style.color = 'black';
+        window.scrollTo(0, 0);
     }
 
     return (
@@ -69,12 +76,14 @@ export default function Profile() {
                 <p id="wishlistNav" onClick={seeWishlist}>wishlist</p>
                 {/* <LogOutButton /> */}
             </div>
-            <div className="profileMainView">
-                {inLibrary && !inWishlist ? <h2>Library</h2> : <h2>Wishlist</h2>}
-                <Grid justifyContent="left" container rowSpacing={5} columnSpacing={5} className="profileMainViewSection">
-                    {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
-                </Grid>
-            </div>
+            <Box id="topOfPage" className="profileMainView">
+                {inLibrary && !inWishlist ? <h2 className="profileMainViewTitle">Library</h2> : <h2 className="profileMainViewTitle">Wishlist</h2>}
+                <Box sx={{ flexGrow: 1 }}>
+                    <Grid justifyContent="left" container rowSpacing={5} columnSpacing={5} className="profileMainViewSection">
+                        {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
+                    </Grid>
+                </Box>
+            </Box>
         </Box>
     );
 }
