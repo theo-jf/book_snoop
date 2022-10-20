@@ -1,5 +1,6 @@
 .profile {
     padding: 50px;
+    padding-right: 0;
     padding-top: 0%;
     display:  block;
 }
@@ -26,11 +27,15 @@
     width: 500;
     margin: 0;
     padding: 0;
-    display: inline;    
+    display: inline;  
+    background-color:rgb(234, 239, 244);
+    padding-left: 30px;  
+    padding-right: 30px;
+    padding-bottom: 50px;
 }
 
 /* .profileMainViewTitle {
-    position: fixed;
+    background-color: blueviolet;
 } */
 
 .profileMainViewSection {
