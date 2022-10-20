@@ -59,11 +59,11 @@ export default function LibraryItem({libraryItem, activeMapEditId, setActiveMapE
             </select>
             {libraryItem.condition ? 'condition' : null}</p>
             {inLocationEditView && activeMapEditId === libraryItem.library_id ? <EditLibraryItemLocation setInLocationEditView={setInLocationEditView} libraryItem={libraryItem} />
-                                : libraryItem.name ? <>
-                                                        <p>Found at {libraryItem.name} in {libraryItem.city}, {libraryItem.state}</p> 
-                                                        <p><button onClick={goToEditView}>Edit Location</button></p>
-                                                     </>
-                                                   : <button onClick={goToEditView}>Select location found</button>}
+                                                                              : libraryItem.name ? <>
+                                                                                                      <p>Found at {libraryItem.name} in {libraryItem.city}, {libraryItem.state}</p> 
+                                                                                                      <p><button onClick={goToEditView}>Edit Location</button></p>
+                                                                                                   </>
+                                                                                                 : <button onClick={goToEditView}>Select location found</button>}
             <button onClick={deleteLibraryItem}>Delete From Library</button>
         </Grid>
     );

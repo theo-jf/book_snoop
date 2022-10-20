@@ -46,7 +46,7 @@ export default function Home() {
                     style={{width: "80%"}}
                     size="small"/>
 
-                <Button onClick={goToSearch}>Search</Button>
+                <Button style={{color: "slategray"}} onClick={goToSearch}>Search</Button>
             </div>
         </div>
     );
