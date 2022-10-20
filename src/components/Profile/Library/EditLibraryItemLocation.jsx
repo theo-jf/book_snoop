@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+// MUI Imports
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
 export default function EditLibraryItemLocation({setInLocationEditView, libraryItem}) {
 
     const key = process.env.REACT_APP_API_KEY;
@@ -42,12 +46,13 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
     }
 
     return (
-        <>
-            <p><input placeholder="search for a location" onChange={(e) => changeLocation(e)} value={location} /></p>
+        <div className="libraryMapPopup">
             {/* If there's no exiting placeId, default to minneapolis */}
+            <TextField className="libraryMapField" size="small" fullWidth placeholder="search for a location" onChange={(e) => changeLocation(e)} value={location} />
             <iframe
-                width="500"
-                height="400"
+                className="libraryMap"
+                width="99%"
+                height="60%"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={changesMade && location != '' ? `https://www.google.com/maps/embed/v1/place?key=${key}&q=${location}`
                                                    : `https://www.google.com/maps/embed/v1/place?key=${key}&q=place_id:${libraryItem.googleMaps_placeId === '' || 
@@ -55,7 +60,7 @@ export default function EditLibraryItemLocation({setInLocationEditView, libraryI
                                                                                                                                                                  : libraryItem.googleMaps_placeId}`}
                 allowFullScreen>
             </iframe>
-            <p><button onClick={discardChanges}>Discard Changes</button><button onClick={saveUpdatedLocation}>Save This Address</button></p>
-        </>
+            <p className="libraryMapButtons"><Button onClick={discardChanges}>Discard Changes</Button><Button onClick={saveUpdatedLocation}>Save This Address</Button></p>
+        </div>
     );
 }

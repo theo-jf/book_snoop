@@ -35,9 +35,9 @@ CREATE TABLE "saved_books" (
 CREATE TABLE "addresses" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR (255) NOT NULL,
-    "street_address" VARCHAR (255) NOT NULL,
-    "city" VARCHAR (255) NOT NULL,
-    "state" VARCHAR (255) NOT NULL,
-    "zip" VARCHAR (16) NOT NULL,
+    "street_address" VARCHAR (255),
+    "city" VARCHAR (255),
+    "state" VARCHAR (255),
+    "zip" VARCHAR (16),
     "googleMaps_placeId" VARCHAR (255) UNIQUE NOT NULL
 );

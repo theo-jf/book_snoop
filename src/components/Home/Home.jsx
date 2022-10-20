@@ -4,6 +4,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+// MUI Imports
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
 import './Home.css';
 
 export default function Home() {
@@ -35,9 +39,15 @@ export default function Home() {
     return (
         <div className="home">
             <h1>Book Snoop</h1>
-            <input onChange={(e) => setSearchInput(e.target.value)}
-                   onKeyDown={(e) => handleKeyDown(e)} />
-            <button onClick={goToSearch}>Search</button>
+            <div>
+                <TextField onChange={(e) => setSearchInput(e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(e)} 
+                    className="homeSearchBar"
+                    style={{width: "80%"}}
+                    size="small"/>
+
+                <Button style={{color: "slategray"}} onClick={goToSearch}>Search</Button>
+            </div>
         </div>
     );
 }

@@ -1,5 +1,7 @@
 // Receives library prop and displays a user's library
 
+import { useState } from "react";
+
 import { useSelector } from "react-redux";
 
 import LibraryItem from "./LibraryItem";
@@ -11,6 +13,8 @@ export default function Library() {
 
     const library = useSelector(store => store.profileReducers.library);
 
+    const [activeMapEditId, setActiveMapEditId] = useState('')
+
     return (
         <>
         {library.length === 0 ? <EmptySection section={'library'} />
@@ -18,7 +22,9 @@ export default function Library() {
                                 {console.log(libraryItem)}
                                     return (
                                         <LibraryItem key={libraryItem.library_id} 
-                                                     libraryItem={libraryItem} 
+                                                     libraryItem={libraryItem}
+                                                     activeMapEditId={activeMapEditId} 
+                                                     setActiveMapEditId={setActiveMapEditId}
                                         />
                                     );
                                 })}
