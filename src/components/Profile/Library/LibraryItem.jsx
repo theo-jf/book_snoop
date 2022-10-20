@@ -46,7 +46,9 @@ export default function LibraryItem({libraryItem}) {
             <p>by {libraryItem.author}</p>
             <p>{libraryItem.isbn}</p>
             <p>{libraryItem.publisher}, {libraryItem.year} {libraryItem.cover}</p>
-            <p><select defaultValue={libraryItem.condition} onChange={(e) => updateCondition(e)}>
+            <p><select defaultValue={libraryItem.condition || '😵‍💫'} onChange={(e) => updateCondition(e)}>
+                {/* <option disabled selected={libraryItem.condition ? false : true} value={undefined}>Choose!</option> */}
+                <option disabled hidden value={'😵‍💫'}>Select condition</option>
                 <option value="F">Like New</option>
                 <option value="NF">Near Fine</option>
                 <option value="VG">Very Good</option>
@@ -54,9 +56,13 @@ export default function LibraryItem({libraryItem}) {
                 <option value="FR">Fair</option>
                 <option value="P">Poor</option>
             </select>
-            condition</p>
+            {libraryItem.condition ? 'condition' : null}</p>
             {inLocationEditView ? <EditLibraryItemLocation setInLocationEditView={setInLocationEditView} libraryItem={libraryItem} />
-                                : <p>Found at {libraryItem.name} in {libraryItem.city}, {libraryItem.state} <button onClick={goToEditView}>Edit Location</button></p>}
+                                : libraryItem.name ? <>
+                                                        <p>Found at {libraryItem.name} in {libraryItem.city}, {libraryItem.state}</p> 
+                                                        <p><button onClick={goToEditView}>Edit Location</button></p>
+                                                     </>
+                                                   : <button onClick={goToEditView}>Select location found</button>}
             <button onClick={deleteLibraryItem}>Delete From Library</button>
         </Grid>
     );
