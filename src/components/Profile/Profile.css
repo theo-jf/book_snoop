@@ -9,16 +9,23 @@
     display: inline;
  
     height: 100%;
-    width: 150px;
+    width: 25%;
     position: sticky;
     left: 0;
     top: 0;
+ 
     /* padding-top: 40px; */
 }
 
 .profileUsername {
     margin-top: 0%;
-    margin-right: 50px;
+    margin-right: 10px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
 }
 
 .profileMainView {
@@ -29,7 +36,8 @@
     padding: 0;
     display: inline;  
     background-color:rgb(234, 239, 244);
-    padding-left: 30px;  
+    padding-left: 15px;  
+    margin-left: 20px;
     padding-right: 30px;
     padding-bottom: 50px;
 }
