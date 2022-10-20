@@ -9,13 +9,14 @@ import Grid from "@mui/material/Grid";
 
 import EditLibraryItemLocation from "./EditLibraryItemLocation";
 
-export default function LibraryItem({libraryItem}) {
+export default function LibraryItem({libraryItem, activeMapEditId, setActiveMapEditId}) {
 
     const dispatch = useDispatch();
 
     const [inLocationEditView, setInLocationEditView] = useState(false);
 
     const goToEditView = () => {
+        setActiveMapEditId(libraryItem.library_id)
         setInLocationEditView(true);
     }
 
@@ -57,7 +58,7 @@ export default function LibraryItem({libraryItem}) {
                 <option value="P">Poor</option>
             </select>
             {libraryItem.condition ? 'condition' : null}</p>
-            {inLocationEditView ? <EditLibraryItemLocation setInLocationEditView={setInLocationEditView} libraryItem={libraryItem} />
+            {inLocationEditView && activeMapEditId === libraryItem.library_id ? <EditLibraryItemLocation setInLocationEditView={setInLocationEditView} libraryItem={libraryItem} />
                                 : libraryItem.name ? <>
                                                         <p>Found at {libraryItem.name} in {libraryItem.city}, {libraryItem.state}</p> 
                                                         <p><button onClick={goToEditView}>Edit Location</button></p>
