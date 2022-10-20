@@ -31,7 +31,8 @@
 .profileMainView {
     /* display: inline-block; */
 
-    width: 500;
+    width: 100%;
+    min-height: 80vh;
     margin: 0;
     padding: 0;
     display: inline;  

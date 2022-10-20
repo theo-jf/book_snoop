@@ -3,6 +3,7 @@
 import { useSelector } from "react-redux";
 
 import LibraryItem from "./LibraryItem";
+import EmptySection from "../EmptySection";
 
 import './Library.css'
 
@@ -12,12 +13,15 @@ export default function Library() {
 
     return (
         <>
-        {library.map((libraryItem) => {
-            {console.log(libraryItem)}
-            return (
-                <LibraryItem key={libraryItem.library_id} libraryItem={libraryItem} />
-            );
-        })}
+        {library.length === 0 ? <EmptySection section={'library'} />
+                              : library.map((libraryItem) => {
+                                {console.log(libraryItem)}
+                                    return (
+                                        <LibraryItem key={libraryItem.library_id} 
+                                                     libraryItem={libraryItem} 
+                                        />
+                                    );
+                                })}
         </>
     );
 }

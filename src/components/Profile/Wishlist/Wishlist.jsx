@@ -3,6 +3,7 @@
 import { useSelector } from "react-redux";
 
 import WishlistItem from "./WishlistItem";
+import EmptySection from "../EmptySection";
 
 import './Wishlist.css';
 
@@ -12,11 +13,14 @@ export default function Wishlist() {
 
     return (
         <>
-        {wishlist.map((wishlistItem) => {
-            return (
-                <WishlistItem key={wishlistItem.wishlist_id} wishlistItem={wishlistItem} />
-            );
-        })}
+        {wishlist.length === 0 ? <EmptySection section={'wishlist'} />
+                               : wishlist.map((wishlistItem) => {
+                                     return (
+                                         <WishlistItem key={wishlistItem.wishlist_id} 
+                                                       wishlistItem={wishlistItem} 
+                                         />
+                                     );
+                                 })}
         </>
     );
 }
