@@ -1,18 +1,41 @@
 import React from 'react';
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
+import './AboutPage.css';
 
-function AboutPage() {
+const tech = ['React', 
+              'Redux-Saga', 
+              'Javascript', 
+              'HTML/CSS', 
+              'Node', 
+              'Express', 
+              'Google Maps Places API', 
+              'Open Library API', 
+              'SQL', 
+              'PostgreSQL', 
+              'Node-Postgres', 
+              'Material UI', 
+              'Cloudinary', 
+              'bcrypt', 
+              'Passport']
+
+export default function AboutPage() {
   return (
     <div className="container">
-      <div>
-        <p>This about page is for anyone to read!</p>
+      <div className="aboutPage">
+        <h1>Thanks for visiting!</h1>
+        <div>
+          <h3>Technologies Used</h3>
+          <ul className="aboutPageList">
+            {tech.map(tech => {
+              return (
+                <li>{tech}</li>
+              );
+            })}
+          </ul>
+          <h3>Special Thanks To ...</h3>
+          <p>The wonderful L'Engle cohort, Matt, and the fantastic staff and students at Prime Digital Academy</p>
+        </div>
       </div>
     </div>
   );
 }
-
-export default AboutPage;

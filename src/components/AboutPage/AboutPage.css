@@ -1,0 +1,8 @@
+.aboutPage {
+    text-align: center;
+}
+
+.aboutPageList { 
+	display: inline-block; 
+	text-align: left; 
+}

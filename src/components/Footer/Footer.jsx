@@ -7,7 +7,7 @@ import './Footer.css';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 function Footer() {
-  return <footer>&copy; Theo Janke-Furman</footer>;
+  return <footer>&copy; <a href='https://theo-jf.github.io' target='_blank'>Theo Janke-Furman</a></footer>;
 }
 
 export default Footer;
