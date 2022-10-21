@@ -13,7 +13,15 @@ function* fetchAddresses(action) {
         })
     } catch (error) {
         console.log(error);
-        alert('Error loading details');
+        // alert('Error loading details');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error loading details'
+            }
+        });
     }
 }
 
@@ -46,10 +54,18 @@ function* fetchNewAddressData(action) {
         yield put ({
             type: 'SAGA_UPDATE_LIBRARY_LOCATION',
             payload: {newAddressObject: newAddressObject}
-        })
+        });
     } catch (error) {
         console.log(error);
         alert('Error fetching new address details');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error fetching new address data'
+            }
+        });
     }
 }
 
