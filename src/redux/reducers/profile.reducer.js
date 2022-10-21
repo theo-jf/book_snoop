@@ -16,7 +16,18 @@ const wishlist = (state = [], action) => {
     return state;
 }
 
+const profileView = (state = 'library', action) => {
+    switch (action.type) {
+        case 'VIEW_LIBRARY':
+            return 'library';
+        case 'VIEW_WISHLIST':
+            return 'wishlist';
+    }
+    return state
+}
+
 export default combineReducers({
     library,
     wishlist,
+    profileView
 });

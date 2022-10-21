@@ -14,12 +14,14 @@ CREATE TABLE "libraries" (
     "address_id" INT REFERENCES "addresses",
     "condition" VARCHAR (20),
     "book_id" INT REFERENCES "saved_books"
+    "date_created" DATETIME NOT NULL DEFAULT(GETDATE());
 );
 
 CREATE TABLE "wishlists" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "users",
     "book_id" INT REFERENCES "saved_books"
+    "date_created" DATETIME NOT NULL DEFAULT(GETDATE());
 );
 
 CREATE TABLE "saved_books" (

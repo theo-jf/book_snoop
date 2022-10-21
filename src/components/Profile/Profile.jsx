@@ -25,6 +25,7 @@ export default function Profile() {
 
 
     const userInfo = useSelector(store => store.user);
+    const profileView = useSelector(store => store.profileView);
 
     // You might need to pass these as props ... we shall see
     // const library = useSelector(store => store.profileReducers.library);
@@ -32,8 +33,9 @@ export default function Profile() {
 
     const dispatch = useDispatch();
 
-    const [inLibrary, setInLibrary] = useState(true);
-    const [inWishlist, setInWishList] = useState(false);
+    // Moved to store, no longer needed in local
+    // const [inLibrary, setInLibrary] = useState(true);
+    // const [inWishlist, setInWishList] = useState(false);
     
     // Fetch library and wishlist info on profile load
     useEffect(() => {
@@ -47,8 +49,7 @@ export default function Profile() {
 
     // Turns library button to 'selected' color, all others to unselected 
     const seeLibrary = () => {
-        setInLibrary(true);
-        setInWishList(false);
+        dispatch({type: 'VIEW_LIBRARY'});
         let libraryNav = document.getElementById('libraryNav');
         libraryNav.style.color = 'black';
         let wishlistNav = document.getElementById('wishlistNav');
@@ -58,8 +59,7 @@ export default function Profile() {
 
     // Turns wishlist button to 'selected' color, all others to unselected 
     const seeWishlist = () => {
-        setInWishList(true);
-        setInLibrary(false);
+        dispatch({type: 'VIEW_WISHLIST'});
         let libraryNav = document.getElementById('libraryNav');
         libraryNav.style.color = 'gray';
         let wishlistNav = document.getElementById('wishlistNav');
@@ -79,10 +79,10 @@ export default function Profile() {
                 {/* <LogOutButton /> */}
             </div>
             <Box id="topOfPage" className="profileMainView">
-                {inLibrary && !inWishlist ? <h2 className="profileMainViewTitle">Library</h2> : <h2 className="profileMainViewTitle">Wishlist</h2>}
+                {profileView === 'library' ? <h2 className="profileMainViewTitle">Library</h2> : <h2 className="profileMainViewTitle">Wishlist</h2>}
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid justifyContent="left" container rowSpacing={5} columnSpacing={5} className="profileMainViewSection">
-                        {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
+                        {profileView === 'library' ? <Library /> : <Wishlist />}
                     </Grid>
                 </Box>
             </Box>
