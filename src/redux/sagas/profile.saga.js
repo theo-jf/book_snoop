@@ -145,6 +145,11 @@ function* moveWishlistItemToLibrary(action) {
                 message: 'Moved to library'
             }
         });
+        // Since library view is default state in store, 
+        //      wishlist snackbar calls also need to set profileView to stay on wishlist
+        yield put ({
+            type: 'VIEW_WISHLIST'
+        });
     } catch (error) {
         console.log(error);
         // alert('Error moving to library');
@@ -155,6 +160,9 @@ function* moveWishlistItemToLibrary(action) {
                 severity: 'error',
                 message: 'Error moving to library'
             }
+        });
+        yield put ({
+            type: 'VIEW_WISHLIST'
         });
     }
 }
@@ -173,6 +181,11 @@ function* deleteWishlistItem(action) {
                 message: 'Deleted'
             }
         });
+        // Since library view is default state in store, 
+        //      wishlist snackbar calls also need to set profileView to stay on wishlist
+        yield put ({
+            type: 'VIEW_WISHLIST'
+        });
     } catch (error) {
         console.log(error);
         // alert('Error deleting wishlist item');
@@ -183,6 +196,9 @@ function* deleteWishlistItem(action) {
                 severity: 'error',
                 message: 'Error deleting book'
             }
+        });
+        yield put ({
+            type: 'VIEW_WISHLIST'
         });
     }
 }
