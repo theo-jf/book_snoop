@@ -23,6 +23,7 @@ export default function AboutPage() {
     <div className="container">
       <div className="aboutPage">
         <h1>Thanks for visiting!</h1>
+        {/* This site was build for a prime solo project, but required a lot of learning on my own etc etc  */}
         <div>
           <h3>Technologies Used</h3>
           <ul className="aboutPageList">
