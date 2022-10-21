@@ -2,7 +2,7 @@
 // Using this search bar redirects the user to SearchPage
 import * as React from 'react';
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // MUI Imports
@@ -19,6 +19,10 @@ export default function Home() {
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
+
+    const isOpen = useSelector(store => store.snackbar.isOpen);
+    const severity = useSelector(store => store.snackbar.severity);
+    const snackbarMessage = useSelector(store => store.snackbar.message);
 
     // Reducer variables to show / hide snackbars
     // Add to library success / failure
@@ -53,6 +57,16 @@ export default function Home() {
         setSearchInput('');
     }
 
+  // Closing snackbar handler
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        dispatch({
+            type: 'CLOSE_SNACKBAR'
+        });
+    }
+
     return (
         <div className="home">
             <h1>Book Snoop</h1>
@@ -65,11 +79,11 @@ export default function Home() {
 
                 <Button style={{color: "slategray"}} onClick={goToSearch}>Search</Button>
             </div>
-            {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                    Error message
+            <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
                 </Alert>
-            </Snackbar> */}
+            </Snackbar>
         </div>
     );
 }
