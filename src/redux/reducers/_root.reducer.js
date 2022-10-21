@@ -9,6 +9,7 @@ import addresses from './addresses.reducer';
 import profileReducers from './profile.reducer';
 import queryFromHome from './queryFromHome.reducer';
 import currentAuthor from './currentAuthor.reducer';
+import snackbar from './snackbar.reducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   addresses,
   profileReducers,
   queryFromHome,
-  currentAuthor
+  currentAuthor,
+  snackbar
 });
 
 export default rootReducer;

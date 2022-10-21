@@ -1,16 +1,28 @@
 // Home search bar here
 // Using this search bar redirects the user to SearchPage
+import * as React from 'react';
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // MUI Imports
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import './Home.css';
 
 export default function Home() {
+
+    // Reducer variables to show / hide snackbars
+    // Add to library success / failure
+    // Add to wishlist success / failure
+    // Switch to library success / failure
+    // Edit location success / failure
+    // Saving new condition success / failure?? 
+    // Other places where an alert is too much (search errors?)
+    // Find all alerts and judge if they should be snackbars
 
     const history = useHistory();
     const dispatch = useDispatch();

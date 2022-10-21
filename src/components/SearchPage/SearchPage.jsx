@@ -1,5 +1,5 @@
 import SearchResultsItem from "./SearchResultsItem";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './SearchPage.css';
@@ -20,6 +20,14 @@ export default function SearchPage() {
 
     const [query, setQuery] = useState(queryFromHome);
     const [searchType, setSearchType] = useState('title');
+
+    const [loadingTimeUp, setLoadingTimeUp] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoadingTimeUp(true)
+        }, 4000);
+    });
 
     const submitQuery = () => {
         // Send query string and search type (title, author, none) to saga function
@@ -51,7 +59,7 @@ export default function SearchPage() {
             </div>
             <div className="searchResultsContainer">
                 <Grid justifyContent="space-evenly" container rowSpacing={5} columnSpacing={5}>
-                    {searchResults.length === 0 && queryFromHome != '' ? <p>Finding books, this may take a second...</p>
+                    {searchResults.length === 0 && queryFromHome != '' ? loadingTimeUp ? <p>Nothing found</p> : <p>Finding books, this may take a second...</p>
                     : searchResults.map((result, i) => {
                         return (
                             <SearchResultsItem key={i} result={result}/>

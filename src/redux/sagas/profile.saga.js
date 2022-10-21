@@ -10,7 +10,15 @@ function* fetchLibrary() {
         });
     } catch (error) {
         console.log(error);
-        alert('Error fetching library, please try again');
+        // alert('Error fetching library, please try again');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error loading library'
+            }
+        });
     }
 }
 
@@ -23,7 +31,15 @@ function* fetchWishlist() {
         });
     } catch (error) {
         console.log(error);
-        alert('Error fetching wishlist, please try again')
+        // alert('Error fetching wishlist, please try again');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error loading wishlist'
+            }
+        });
     }
 }
 
@@ -34,9 +50,25 @@ function* updateLibraryCondition(action) {
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'
         });
+        // yield put ({
+        //     type: 'SET_SNACKBAR',
+        //     payload: {
+        //         isOpen: true,
+        //         severity: 'success',
+        //         message: 'Condition updated'
+        //     }
+        // });
     } catch (error) {
         console.log(error);
-        alert('Error updating library');
+        // alert('Error updating library');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'error updating condition'
+            }
+        });
     }
 }
 
@@ -46,9 +78,25 @@ function* updateLibraryLocation(action) {
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'
         });
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'success',
+                message: 'Location updated'
+            }
+        });
     } catch (error) {
         console.log(error);
-        alert('Error updating library');
+        // alert('Error updating library');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'error updating location'
+            }
+        });
     }
 }
 
@@ -58,9 +106,25 @@ function* deleteLibraryItem(action) {
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'
         });
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'success',
+                message: 'Deleted'
+            }
+        });
     } catch (error) {
         console.log(error);
-        alert('Error deleting library item');
+        // alert('Error deleting library item');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error deleting book'
+            }
+        });
     }
 }
 
@@ -72,10 +136,26 @@ function* moveWishlistItemToLibrary(action) {
         });
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'
-        })
+        });
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'success',
+                message: 'Moved to library'
+            }
+        });
     } catch (error) {
         console.log(error);
-        alert('Error moving to library');
+        // alert('Error moving to library');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error moving to library'
+            }
+        });
     }
 }
 
@@ -85,9 +165,25 @@ function* deleteWishlistItem(action) {
         yield put({
             type: 'SAGA_FETCH_USER_WISHLIST'
         });
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'success',
+                message: 'Deleted'
+            }
+        });
     } catch (error) {
         console.log(error);
-        alert('Error deleting wishlist item');
+        // alert('Error deleting wishlist item');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error deleting book'
+            }
+        });
     }
 }
 

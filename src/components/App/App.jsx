@@ -27,12 +27,35 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+// MUI Imports
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 import './App.css';
 
 function App() {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
+
+  const isOpen = useSelector(store => store.snackbar.isOpen);
+  const severity = useSelector(store => store.snackbar.severity);
+  const snackbarMessage = useSelector(store => store.snackbar.message);
+
+    // Alert for Mui snackbars
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  // Closing snackbar handler
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    dispatch({
+      type: 'CLOSE_SNACKBAR'
+    });
+  }
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -122,6 +145,11 @@ function App() {
         </Switch>
         <Footer />
       </div>
+      <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+      </Snackbar>
     </Router>
   );
 }

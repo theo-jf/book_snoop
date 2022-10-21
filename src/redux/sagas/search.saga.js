@@ -16,7 +16,15 @@ function* searchBooks(action) {
         });
     } catch(error){
         console.log(error);
-        alert('Search error, please try again');
+        // alert('Search error, please try again');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'connection error, please try again'
+            }
+        });
     }
 }
 
@@ -27,9 +35,25 @@ function* addBookToLibrary(action) {
 
     try {
         yield axios.post('/api/library', newBook);
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'success',
+                message: 'Added to library'
+            }
+        });
     } catch (error) {
         console.log(error);
-        alert('Error adding to library, please try again');
+        // alert('Error adding to library, please try again');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error adding to library'
+            }
+        });
     }
 }
 
@@ -40,9 +64,25 @@ function* addBookToWishlist(action) {
 
     try {
         yield axios.post('/api/wishlist', newBook);
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'success',
+                message: 'Added to wishlist'
+            }
+        });
     } catch (error) {
         console.log(error);
-        alert('Error adding to wishlist, please try again');
+        // alert('Error adding to wishlist, please try again');
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'Error adding to wishlist'
+            }
+        });
     }
 }
 
