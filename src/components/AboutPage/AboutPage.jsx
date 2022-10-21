@@ -27,9 +27,9 @@ export default function AboutPage() {
         <div>
           <h3>Technologies Used</h3>
           <ul className="aboutPageList">
-            {tech.map(tech => {
+            {tech.map((tech, i) => {
               return (
-                <li>{tech}</li>
+                <li key={i}>{tech}</li>
               );
             })}
           </ul>

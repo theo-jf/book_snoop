@@ -17,12 +17,28 @@ import Grid from "@mui/material/Grid";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 
+// Cloudinary
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from "@cloudinary/url-gen/actions/resize";
+
+import CldImageUploader from "./CldImageUploader";
+
 import './Profile.css';
 
 const drawerWidth = 240;
 
 export default function Profile() {
 
+    // Keys
+    const cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
+
+      // Cloudinary configuration
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: `${cloudName}`
+        }
+    });
 
     const userInfo = useSelector(store => store.user);
     const profileView = useSelector(store => store.profileReducers.profileView);
@@ -78,8 +94,13 @@ export default function Profile() {
         <Box sx={{ display: 'flex' }} className="profile">
             <div className="profileNav">
                 <div className="profileAvatarBorder">
-                    <img alt="profile picture here :)" src='' className="profileAvatar" />
+                {/* <CldImageUploader
+                    cloud_name={cld.cloudinaryConfig.cloud.cloud_name}
+                    upload_preset={cld.cloudinaryConfig.cloud.upload_preset}
+                    onImageUpload={(publicId) => onImageUploadHandler(publicId)}
+                /> */}
                 </div>
+                <h4>Welcome,</h4>
                 <h2 className="profileUsername">{userInfo.username}</h2>
                 <p id="libraryNav" onClick={seeLibrary}>library</p>
                 <p id="wishlistNav" onClick={seeWishlist}>wishlist</p>
