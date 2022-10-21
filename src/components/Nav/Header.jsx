@@ -13,6 +13,9 @@ export default function Header() {
         <h2 className="nav-title">Book Snoop</h2>
       </Link>
       <div>
+        <Link className="navLink" to="/search">
+          Search
+        </Link>
         <Link className="navLink" to="/about">
           About
         </Link>
