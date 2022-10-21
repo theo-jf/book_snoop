@@ -13,11 +13,14 @@ export default function Header() {
         <h2 className="nav-title">Book Snoop</h2>
       </Link>
       <div>
+        <Link className="navLink" to="/about">
+          About
+        </Link>
         {/* If no user is logged in, show these links */}
         {!user.id && (
           // If there's no user, show login/registration links
           <Link className="navLink" to="/login">
-            Login
+            Login / Register
           </Link>
         )}
 

@@ -25,15 +25,9 @@ export default function Profile() {
 
 
     const userInfo = useSelector(store => store.user);
-
-    // You might need to pass these as props ... we shall see
-    // const library = useSelector(store => store.profileReducers.library);
-    // const wishlist = useSelector(store => store.profileReducers.wishlist);
+    const profileView = useSelector(store => store.profileReducers.profileView);
 
     const dispatch = useDispatch();
-
-    const [inLibrary, setInLibrary] = useState(true);
-    const [inWishlist, setInWishList] = useState(false);
     
     // Fetch library and wishlist info on profile load
     useEffect(() => {
@@ -43,27 +37,40 @@ export default function Profile() {
         dispatch({
             type: 'SAGA_FETCH_USER_WISHLIST'
         })
-    }, [])
 
-    // Turns library button to 'selected' color, all others to unselected 
-    const seeLibrary = () => {
-        setInLibrary(true);
-        setInWishList(false);
+        // Ensure proper button highlighted
+        if (profileView === 'library') {
+            highlightLibraryButton();
+        } else if (profileView === 'wishlist') {
+            highlightWishlistButton();
+        }
+    }, []);
+
+    const highlightLibraryButton = () => {
         let libraryNav = document.getElementById('libraryNav');
         libraryNav.style.color = 'black';
         let wishlistNav = document.getElementById('wishlistNav');
         wishlistNav.style.color = 'gray';
+    }
+
+    const highlightWishlistButton = () => {
+        let libraryNav = document.getElementById('libraryNav');
+        libraryNav.style.color = 'gray';
+        let wishlistNav = document.getElementById('wishlistNav');
+        wishlistNav.style.color = 'black';
+    }
+
+    // Turns library button to 'selected' color, all others to unselected 
+    const seeLibrary = () => {
+        dispatch({type: 'VIEW_LIBRARY'});
+        highlightLibraryButton();
         window.scrollTo(0, 0);
     }
 
     // Turns wishlist button to 'selected' color, all others to unselected 
     const seeWishlist = () => {
-        setInWishList(true);
-        setInLibrary(false);
-        let libraryNav = document.getElementById('libraryNav');
-        libraryNav.style.color = 'gray';
-        let wishlistNav = document.getElementById('wishlistNav');
-        wishlistNav.style.color = 'black';
+        dispatch({type: 'VIEW_WISHLIST'});
+        highlightWishlistButton();
         window.scrollTo(0, 0);
     }
 
@@ -79,10 +86,10 @@ export default function Profile() {
                 {/* <LogOutButton /> */}
             </div>
             <Box id="topOfPage" className="profileMainView">
-                {inLibrary && !inWishlist ? <h2 className="profileMainViewTitle">Library</h2> : <h2 className="profileMainViewTitle">Wishlist</h2>}
+                {profileView === 'library' ? <h2 className="profileMainViewTitle">Library</h2> : <h2 className="profileMainViewTitle">Wishlist</h2>}
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid justifyContent="left" container rowSpacing={5} columnSpacing={5} className="profileMainViewSection">
-                        {inLibrary && !inWishlist ? <Library /> : <Wishlist />}
+                        {profileView === 'library' ? <Library /> : <Wishlist />}
                     </Grid>
                 </Box>
             </Box>
