@@ -14,6 +14,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// Updates a user's profile picture
+router.put('/', rejectUnauthenticated, (req, res) => {
+  const picturePublicId = req.body.publicId;
+  const userId = req.user.id;
+
+  const sqlText = `UPDATE "users"
+                      SET "avatar_public_id" = $1
+                      WHERE "id" = $2;`
+
+  pool.query(sqlText, [picturePublicId, userId])
+      .then((response) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('Error updating user profile picture', error);
+        res.sendStatus(500);
+      }) 
+
+})
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted

@@ -14,8 +14,6 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 // MUI Imports 
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 
 // Cloudinary
 import { Cloudinary } from "@cloudinary/url-gen";
@@ -65,14 +63,23 @@ export default function Profile() {
         } else if (profileView === 'wishlist') {
             highlightWishlistButton();
         }
+
     }, []);
 
-    // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-    const myImage = cld.image(`cld-sample-5`); 
+    // Use image retrieval ID associated with user's profile
+    //      Otherwise, use default profile image
+    const myImage = cld.image((userInfo.avatar_public_id != undefined ? `${userInfo.avatar_public_id}` : `default_avatar.jpg_ikhsuf`)); 
     myImage.resize(fill().width(250).height(250));
 
     const onImageUploadHandler = (publicId) => {
         setUploadedImage([publicId]);
+        
+        console.log('PUCLIC ID!!!', publicId);
+        // Saga call to set a user's new profile picture
+        dispatch({
+            type: 'SAGA_SET_PROFILE_PICTURE',
+            payload: publicId
+        })
     };
 
     const showAddProfilePictureButton = () => {

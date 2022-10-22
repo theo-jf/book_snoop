@@ -43,6 +43,25 @@ function* fetchWishlist() {
     }
 }
 
+function* updateProfilePicture(action) {
+    try {
+        yield axios.put(`/api/user`, {publicId: action.payload});
+        yield put({
+            type: 'FETCH_USER'
+        });
+    } catch (error) {
+        console.log(error);
+        yield put ({
+            type: 'SET_SNACKBAR',
+            payload: {
+                isOpen: true,
+                severity: 'error',
+                message: 'error updating profile picture'
+            }
+        });
+    }
+}
+
 function* updateLibraryCondition(action) {
     try {
         console.log('UPDATING CONDITION', action.payload)
@@ -206,6 +225,7 @@ function* deleteWishlistItem(action) {
 export default function* profileSaga() {
     yield takeLatest('SAGA_FETCH_USER_LIBRARY', fetchLibrary);
     yield takeLatest('SAGA_FETCH_USER_WISHLIST', fetchWishlist);
+    yield takeLatest('SAGA_SET_PROFILE_PICTURE', updateProfilePicture)
     yield takeLatest('SAGA_UPDATE_LIBRARY_CONDITION', updateLibraryCondition);
     yield takeLatest('SAGA_UPDATE_LIBRARY_LOCATION', updateLibraryLocation);
     yield takeLatest('SAGA_DELETE_LIBRARY_ITEM', deleteLibraryItem);
