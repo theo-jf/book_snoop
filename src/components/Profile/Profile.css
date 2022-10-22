@@ -19,7 +19,26 @@
 }
 
 .profileAvatarBorder {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.profilePicture {
+    border-radius: 500px;
+    transition: .5s;
+}
+
+.addProfilePicture {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+#imageUploader {
+    visibility: hidden;
 }
 
 .profileUsername {

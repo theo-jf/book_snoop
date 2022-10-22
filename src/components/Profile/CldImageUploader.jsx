@@ -2,6 +2,10 @@ import { useSelector } from "react-redux";
 
 import { openUploadWidget } from "../../utils/CloudinaryService";
 
+// MUI Imports
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
 export default function CldImageUploader(props) {
   const user = useSelector(store => store.user)
   const uploadImageWidget = () => {
@@ -24,8 +28,9 @@ export default function CldImageUploader(props) {
   };
 
   return (
-    <button className="greenButton" onClick={uploadImageWidget}>
-      Upload new profile picture
-    </button>
+    // <button className="greenButton" onClick={uploadImageWidget}>
+    <IconButton id="imageUploader" className="addProfilePicture" color="primary" aria-label="upload picture" component="label" onClick={uploadImageWidget}>
+        <PhotoCamera />
+    </IconButton>
   );
 };
