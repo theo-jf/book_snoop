@@ -1,4 +1,4 @@
-// import { Cloudinary as CoreCloudinary, Util } from "cloudinary";
+import { Cloudinary as CoreCloudinary, Util } from "cloudinary-core";
 
 export const url = (publicId, options) => {
   try {

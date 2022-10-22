@@ -23,22 +23,28 @@ import { AdvancedImage } from '@cloudinary/react';
 import { fill } from "@cloudinary/url-gen/actions/resize";
 
 import CldImageUploader from "./CldImageUploader";
+import CldGallery from "./CldGallery";
 
 import './Profile.css';
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
 export default function Profile() {
 
     // Keys
     const cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
+    const uploadPreset = process.env.REACT_APP_CLOUDINARY_PRESET;
 
-      // Cloudinary configuration
+    // Cloudinary configuration
     const cld = new Cloudinary({
         cloud: {
-            cloudName: `${cloudName}`
+            cloudName: `${cloudName}`,
+            uploadPreset: `${uploadPreset}`
         }
     });
+
+
+    const [uploadedImage, setUploadedImage] = useState([]);
 
     const userInfo = useSelector(store => store.user);
     const profileView = useSelector(store => store.profileReducers.profileView);
@@ -61,6 +67,14 @@ export default function Profile() {
             highlightWishlistButton();
         }
     }, []);
+
+    // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
+    const myImage = cld.image(`cld-sample-5`); 
+    myImage.resize(fill().width(250).height(250));
+
+    const onImageUploadHandler = (publicId) => {
+        setUploadedImage([publicId]);
+    };
 
     const highlightLibraryButton = () => {
         let libraryNav = document.getElementById('libraryNav');
@@ -94,11 +108,12 @@ export default function Profile() {
         <Box sx={{ display: 'flex' }} className="profile">
             <div className="profileNav">
                 <div className="profileAvatarBorder">
-                {/* <CldImageUploader
-                    cloud_name={cld.cloudinaryConfig.cloud.cloud_name}
-                    upload_preset={cld.cloudinaryConfig.cloud.upload_preset}
+                <AdvancedImage cldImg={myImage} />
+                <CldImageUploader
+                    cloud_name={cld.cloudinaryConfig.cloud.cloudName}
+                    upload_preset={cld.cloudinaryConfig.cloud.uploadPreset}
                     onImageUpload={(publicId) => onImageUploadHandler(publicId)}
-                /> */}
+                />
                 </div>
                 <h4>Welcome,</h4>
                 <h2 className="profileUsername">{userInfo.username}</h2>

@@ -1,13 +1,16 @@
+import { useSelector } from "react-redux";
+
 import { openUploadWidget } from "../../utils/CloudinaryService";
 
-const CldImageUploader = (props) => {
+export default function CldImageUploader(props) {
+  const user = useSelector(store => store.user)
   const uploadImageWidget = () => {
-    console.log(props);
+    console.log('PROPS:', props);
     let myUploadWidget = openUploadWidget(
       {
         cloudName: props.cloud_name,
         uploadPreset: props.upload_preset,
-        tags: ["myname"],
+        tags: [`${user.id}`],
         maxImageWidth: 600,
         sources: ["local", "url", "camera"]
       },
@@ -22,9 +25,7 @@ const CldImageUploader = (props) => {
 
   return (
     <button className="greenButton" onClick={uploadImageWidget}>
-      Upload Image
+      Upload new profile picture
     </button>
   );
 };
-
-export default CldImageUploader;
