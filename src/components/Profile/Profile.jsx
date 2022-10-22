@@ -14,15 +14,34 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 // MUI Imports 
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+
+// Cloudinary
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from "@cloudinary/url-gen/actions/resize";
+
+import CldImageUploader from "./CldImageUploader";
 
 import './Profile.css';
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
 export default function Profile() {
 
+    // Keys
+    const cloudName = process.env.REACT_APP_CLOUDINARY_NAME;
+    const uploadPreset = process.env.REACT_APP_CLOUDINARY_PRESET;
+
+    // Cloudinary configuration
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: `${cloudName}`,
+            uploadPreset: `${uploadPreset}`
+        }
+    });
+
+
+    const [uploadedImage, setUploadedImage] = useState([]);
 
     const userInfo = useSelector(store => store.user);
     const profileView = useSelector(store => store.profileReducers.profileView);
@@ -44,7 +63,38 @@ export default function Profile() {
         } else if (profileView === 'wishlist') {
             highlightWishlistButton();
         }
+
     }, []);
+
+    // Use image retrieval ID associated with user's profile
+    //      Otherwise, use default profile image
+    const myImage = cld.image((userInfo.avatar_public_id != undefined ? `${userInfo.avatar_public_id}` : `default_avatar.jpg_ikhsuf`)); 
+    myImage.resize(fill().width(250).height(250));
+
+    const onImageUploadHandler = (publicId) => {
+        setUploadedImage([publicId]);
+        
+        console.log('PUCLIC ID!!!', publicId);
+        // Saga call to set a user's new profile picture
+        dispatch({
+            type: 'SAGA_SET_PROFILE_PICTURE',
+            payload: publicId
+        })
+    };
+
+    const showAddProfilePictureButton = () => {
+        let button = document.getElementById('imageUploader');
+        button.style.visibility = 'visible';
+        let picture = document.getElementById('profilePicture');
+        picture.style.filter = 'brightness(70%)'
+    }
+
+    const hideAddProfilePictureButton = () => {
+        let button = document.getElementById('imageUploader');
+        button.style.visibility = 'hidden';
+        let picture = document.getElementById('profilePicture');
+        picture.style.filter = 'brightness(100%)'
+    }
 
     const highlightLibraryButton = () => {
         let libraryNav = document.getElementById('libraryNav');
@@ -77,9 +127,17 @@ export default function Profile() {
     return (
         <Box sx={{ display: 'flex' }} className="profile">
             <div className="profileNav">
-                <div className="profileAvatarBorder">
-                    <img alt="profile picture here :)" src='' className="profileAvatar" />
+                <div onMouseEnter={showAddProfilePictureButton}
+                     onMouseLeave={hideAddProfilePictureButton} 
+                     className="profileAvatarBorder">
+                    <AdvancedImage id="profilePicture" className="profilePicture" cldImg={myImage} />
+                    <CldImageUploader
+                        cloud_name={cld.cloudinaryConfig.cloud.cloudName}
+                        upload_preset={cld.cloudinaryConfig.cloud.uploadPreset}
+                        onImageUpload={(publicId) => onImageUploadHandler(publicId)}
+                    />
                 </div>
+                <h4>Welcome,</h4>
                 <h2 className="profileUsername">{userInfo.username}</h2>
                 <p id="libraryNav" onClick={seeLibrary}>library</p>
                 <p id="wishlistNav" onClick={seeWishlist}>wishlist</p>

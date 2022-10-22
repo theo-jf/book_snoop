@@ -34,6 +34,7 @@ import MuiAlert from '@mui/material/Alert';
 import './App.css';
 
 function App() {
+  
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
@@ -42,7 +43,7 @@ function App() {
   const severity = useSelector(store => store.snackbar.severity);
   const snackbarMessage = useSelector(store => store.snackbar.message);
 
-    // Alert for Mui snackbars
+  // Alert for Mui snackbars
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });

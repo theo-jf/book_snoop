@@ -6,7 +6,8 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "zip" VARCHAR (16)
+    "zip" VARCHAR (16),
+    "avatar_public_id" VARCHAR (1000)
 );
 
 CREATE TABLE "libraries" (
