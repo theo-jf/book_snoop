@@ -16,6 +16,7 @@ const addressRouter = require('./routes/address.router') ;
 const librariesRouter = require('./routes/libraries.router');
 const wishlistsRouter = require('./routes/wishlists.router');
 const newAddressRouter = require('./routes/newAddress.router');
+const feedRouter = require('./routes/feed.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -37,6 +38,7 @@ app.use('/api/addresses', addressRouter);
 app.use('/api/library', librariesRouter);
 app.use('/api/wishlist', wishlistsRouter);
 app.use('/api/newaddress', newAddressRouter);
+app.use('/api/feed', feedRouter);
 
 // Serve static files
 app.use(express.static('build'));
