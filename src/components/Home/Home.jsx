@@ -53,7 +53,7 @@ export default function Home() {
     return (
         <div className="home">
             <h1>Book Snoop</h1>
-            <div>
+            <div className="searchDiv">
                 <TextField onChange={(e) => setSearchInput(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e)} 
                     className="homeSearchBar"

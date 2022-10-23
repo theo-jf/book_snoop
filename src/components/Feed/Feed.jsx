@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import FeedItem from "./FeedItem";
 
+// MUI Imports
+import Box from "@mui/material/Box";
+
+import './Feed.css'
+
 export default function Feed() {
 
     const dispatch = useDispatch();
@@ -18,12 +23,14 @@ export default function Feed() {
     }, []);
 
     return (
-        <>
-            {feed.map((food, i) => {
-                return (
-                    <FeedItem key={i} food={food} />
-                );
-            })}
-        </>
+        <div className="feedDiv">
+            <Box className="feed" width={'60vw'} height={'50vh'} overflow={'scroll'}>
+                {feed.map((food, i) => {
+                    return (
+                        <FeedItem key={i} food={food} />
+                    );
+                })}
+            </Box>
+        </div>
     );
 }
