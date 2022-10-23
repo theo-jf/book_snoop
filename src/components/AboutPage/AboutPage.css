@@ -3,6 +3,36 @@
 }
 
 .aboutPageList { 
-	display: inline-block; 
+	/* display: inline-block;  */
 	text-align: left; 
+	margin: auto;
+}
+
+.techUsed {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.photoBox {
+	margin: auto;
+	max-width: 800px;
+}
+
+.headshot {
+	width: 40%;
+	max-width: 300px;
+	margin: auto;
+	/* margin-right: 50px; */
+}
+
+.qrCode {
+	width: 30%;
+	max-width: 200px;
+	border-style:ridge;
+	margin: auto;
+}
+
+.futureText {
+	max-width: 800px;
+	margin: auto;
 }
