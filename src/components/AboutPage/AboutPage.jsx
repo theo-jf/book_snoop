@@ -18,6 +18,12 @@ const tech = ['React',
               'bcrypt', 
               'Passport']
 
+              // I want to add interactivity between the feed and looking up an edition, I want to add zip code specificity for user's feed and addresses lists in map view
+              // I want to add a friends list
+              // Social feed sorting
+              // Search results sorting (only being sorted by backend, publish date sort function)
+              // More? 
+
 export default function AboutPage() {
   return (
     <div className="container">

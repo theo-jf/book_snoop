@@ -13,6 +13,8 @@ import MuiAlert from '@mui/material/Alert';
 
 import './Home.css';
 
+import Feed from '../Feed/Feed';
+
 export default function Home() {
 
     // Reducer variables to show / hide snackbars
@@ -51,7 +53,7 @@ export default function Home() {
     return (
         <div className="home">
             <h1>Book Snoop</h1>
-            <div>
+            <div className="searchDiv">
                 <TextField onChange={(e) => setSearchInput(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e)} 
                     className="homeSearchBar"
@@ -60,6 +62,7 @@ export default function Home() {
 
                 <Button style={{color: "slategray"}} onClick={goToSearch}>Search</Button>
             </div>
+            <Feed />
         </div>
     );
 }

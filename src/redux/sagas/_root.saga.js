@@ -8,6 +8,7 @@ import searchSaga from './search.saga';
 import editionsSaga from './editions.saga';
 import addressesSaga from './addresses.saga';
 import profileSaga from './profile.saga';
+import feedSaga from './feed.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     searchSaga(),
     editionsSaga(),
     addressesSaga(),
-    profileSaga()
+    profileSaga(),
+    feedSaga()
   ]);
 }
