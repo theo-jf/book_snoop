@@ -15,15 +15,15 @@ CREATE TABLE "libraries" (
     "user_id" INT REFERENCES "users",
     "address_id" INT REFERENCES "addresses",
     "condition" VARCHAR (20),
-    "book_id" INT REFERENCES "saved_books"
-    "date_created" DATETIME NOT NULL DEFAULT(GETDATE());
+    "book_id" INT REFERENCES "saved_books",
+    "date_created" TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE TABLE "wishlists" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "users",
-    "book_id" INT REFERENCES "saved_books"
-    "date_created" DATETIME NOT NULL DEFAULT(GETDATE());
+    "book_id" INT REFERENCES "saved_books",
+    "date_created" TIMESTAMP NOT NULL DEFAULT now()
 );
 
 CREATE TABLE "saved_books" (
