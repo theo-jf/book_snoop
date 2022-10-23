@@ -5,7 +5,7 @@ function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [zipCode, setZipCode] = useState('');
+  // const [zipCode, setZipCode] = useState('');
 
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <label htmlFor="zip">
+        {/* <label htmlFor="zip">
           Zip code (optional):
           <input
             type="text"
@@ -63,7 +63,7 @@ function RegisterForm() {
             value={zipCode}
             onChange={(event) => setZipCode(event.target.value)}
           />
-        </label>
+        </label> */}
       </div>
       <div>
         <label htmlFor="password">
