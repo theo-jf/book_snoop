@@ -28,6 +28,15 @@ router.get('/', (req, res) => {
                         ) results
                             ORDER BY time_stamps DESC;`
 
+    pool.query(sqlText)
+        .then((results) => {
+            const feed = results.rows;
+            res.send(feed);
+        }) 
+        .catch((error) => {
+            console.log('Error in GET /api/feed query', error);
+            res.sendStatus(500);
+        })                       
 });
 
 
