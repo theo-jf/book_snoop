@@ -43,8 +43,8 @@ export default function LibraryItem({libraryItem, activeMapEditId, setActiveMapE
     return (        
         <Grid item xs={12} sm={6} md={3} lg={2} className="libraryItem">
             <img className="libraryItemImg" src={`https://covers.openlibrary.org/b/isbn/${libraryItem.isbn}-M.jpg`} />
-            <p>{libraryItem.title}</p>
-            <p>by {libraryItem.author}</p>
+            <p className="libraryTitle">{libraryItem.title}</p>
+            <p className="libraryAuthor">by {libraryItem.author}</p>
             <p>{libraryItem.isbn}</p>
             <p>{libraryItem.publisher}, {libraryItem.year} {libraryItem.cover}</p>
             <p><select defaultValue={libraryItem.condition || '😵‍💫'} onChange={(e) => updateCondition(e)}>

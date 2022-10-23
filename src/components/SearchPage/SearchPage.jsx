@@ -29,6 +29,12 @@ export default function SearchPage() {
         }, 4000);
     });
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && query != '' && searchType != '') {
+            submitQuery();
+        }
+    }
+
     const submitQuery = () => {
         // Send query string and search type (title, author, none) to saga function
         dispatch({
@@ -46,16 +52,17 @@ export default function SearchPage() {
                 <TextField
                     placeholder="title, author, isbn..."
                     size="small"
-                    style={{width: "80%"}}
+                    style={{width: "80%", marginBottom: '10px'}}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)} 
+                    onKeyDown={(e) => handleKeyDown(e)} 
                 />
-                <Select size="small" value={searchType} style={{width: "8%", marginLeft: "10px"}} onChange={(e) => setSearchType(e.target.value)}>
+                <Select size="small" value={searchType} style={{width: "140px", marginLeft: "10px"}} onChange={(e) => setSearchType(e.target.value)}>
                     <MenuItem default value="title">title</MenuItem>
                     <MenuItem value="author">author</MenuItem>
                     <MenuItem value="q">everything</MenuItem>
                 </Select>
-                <Button onClick={submitQuery}>Search</Button>
+                <Button style={{color: "slategray"}} onClick={submitQuery}>Search</Button>
             </div>
             <div className="searchResultsContainer">
                 <Grid justifyContent="space-evenly" container rowSpacing={5} columnSpacing={5}>
