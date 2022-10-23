@@ -36,8 +36,8 @@ export default function WishlistItem({wishlistItem}) {
             { movedToLibrary ? <p>Moved to library</p> 
                              : <>
                                     <img className="wishlistItemImg" src={`https://covers.openlibrary.org/b/isbn/${wishlistItem.isbn}-M.jpg`} />
-                                    <p>{wishlistItem.title}</p>
-                                    <p>by {wishlistItem.author}</p>
+                                    <p className="wishlistTitle">{wishlistItem.title}</p>
+                                    <p className="wishlistAuthor">by {wishlistItem.author}</p>
                                     <p>{wishlistItem.isbn}</p>
                                     <p>{wishlistItem.publisher}, {wishlistItem.year} {wishlistItem.cover}</p>
                                     <button onClick={moveToLibrary}>Move To Library</button>
