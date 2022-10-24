@@ -68,7 +68,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         pool.query(sqlText, [location.name, location.street_address, location.city, location.state, location.zip, location.googleMaps_placeId])       
             .then((results) => {
                 // Use the results to get the new address id, then update the library entry
-                console.log('RESULTS IN NEW ADDY', results.rows[0].id);
                 const addressId = results.rows[0].id;
                 const sqlText = `UPDATE "libraries"
                                     SET "address_id" = $1
@@ -92,7 +91,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
                 pool.query(sqlText, [location.googleMaps_placeId])
                     .then((results) => {
                         // Use the results to get the existing address id, then update the library entry
-                        console.log('RESULTS IN NEED USE OLD ADDY', results.rows[0].id);
                         const addressId = results.rows[0].id;
                         const sqlText = `UPDATE "libraries"
                                             SET "address_id" = $1
@@ -191,7 +189,6 @@ router.post('/fromwishlist', rejectUnauthenticated, async (req, res) => {
 
     // ••• This route is forbidden if not logged in •••
 
-    console.log('req.body:', req.body.id);
 
     const wishlist_id = req.body.id;
 

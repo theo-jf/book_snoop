@@ -5,7 +5,6 @@ function* fetchFeed() {
     try {
         // In the future, send user zip code as a query
         const feedResults = yield axios.get('/api/feed');
-        console.log('FEEED', feedResults.data);
         yield put ({
             type: 'SET_FEED',
             payload: feedResults.data

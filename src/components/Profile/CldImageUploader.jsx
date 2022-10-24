@@ -9,7 +9,6 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 export default function CldImageUploader(props) {
   const user = useSelector(store => store.user)
   const uploadImageWidget = () => {
-    console.log('PROPS:', props);
     let myUploadWidget = openUploadWidget(
       {
         cloudName: props.cloud_name,

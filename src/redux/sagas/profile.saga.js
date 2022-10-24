@@ -64,7 +64,6 @@ function* updateProfilePicture(action) {
 
 function* updateLibraryCondition(action) {
     try {
-        console.log('UPDATING CONDITION', action.payload)
         yield axios.put(`/api/library/${action.payload.id}`, action.payload);
         yield put({
             type: 'SAGA_FETCH_USER_LIBRARY'

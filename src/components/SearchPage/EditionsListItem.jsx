@@ -16,7 +16,6 @@ export default function EditionsListItem({edition, setMapPageActive}) {
     const [justAddedToWishlist, setJustAddedToWishlist] = useState(false);
 
     const addToLibrary = () => {
-        console.log('CURRENT AUTHOR', currentAuthor)
         dispatch({
             type: 'SAGA_ADD_TO_LIBRARY',
             payload: {
