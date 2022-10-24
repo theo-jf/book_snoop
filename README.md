@@ -1,121 +1,110 @@
+# Book Snoop
 
-# Prime Solo Project Starting Repo
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+## Description
+**Prime Solo Project**
+*Duration: Two Weeks*
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+Book Snoop is a full-stack book hunting application designed help users find a specific edition of a book. Users can browse for an edition using the app's search functionality and then add a given edition to their profile's wishlist or library. 
 
-## Use the Template for This Repository (Don't Clone)
+Upon adding an edition to their library, a user may enter the location where they found the addition along with what condition it was found in. This information is then compiled and integrated into the search tool, giving other users a list of addresses where a particular edition was found, and in what average condition. User activity is also featured in a social feed on the home page.
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account. Make the project `PUBLIC`!
+Apart from meeting CRUD requirements, all project functionalities were decided upon individually, and all third-party technologies used were self-taught.
+
+The original project scope document, including first-draft wireframes, can be viewed [here](https://docs.google.com/document/d/1O1XUeNeHpviY5gMuPJp8IkpHf3p2MvFUtE-66Uqrs2Q/edit?usp=sharing)
+
+## Final Product Snapshots
+`Home`
+
+![Wireframe](./public/wireframes/Book_Snoop_Snaphot1.png)
+
+`Search View`
+
+![Wireframe](./public/wireframes/Book_Snoop_Snapshot2.png)
+
+`Address List View`
+
+![Wireframe](./public/wireframes/Book_Snoop_Snapshot3.png)
+
+`Profile`
+
+![Wireframe](./public/wireframes/Book_Snoop_Snapshot4.png)
+
+`Profile Edit View`
+
+![Wireframe](./public/wireframes/Book_Snoop_Screenshot5.png)
+
+### Prerequisites
+    • Node.js
+    • Postgres
+    • Google Cloud Account
+    • Cloudinary Account
+
+## Installation and Setup
+
+Fully deployed app link coming soon!
+
+For now, run it locally:
+
+1. Clone this repository from Github
+2. Create a free [Google Cloud](https://cloud.google.com) account
+  - From the **Google Maps Platform** page, create an API key
+  - On this key, enable the **Places API** and the **Maps Embed API**
+  - Save this key!
+
+3. Create a free [Cloudinary](https://cloudinary.com) Account
+  - Once you have a cloud and an attached cloud name (following the new user instructions), go to the **Settings** page and click the **Upload** tab
+  - Scroll down to **Upload Presets**, and click **Add upload preset**
+    - Turn the signing mode for this new preset to **Unsigned**
+    - Turn 'Use filename or externally defined Public ID' to **on**
+    - Turn 'Unique filename' to **on**
+  - Save this new preset's name for later, and **don't turn on any access restrictions**
+
+  - If you'd (optionally) like a default profile picture for your users, upload a picture to your cloud and name it `default_avatar.jpg_ikhsuf`
+
+4. Create a `.env` file on the top level of your project files
+  - In your `.env` file, create the following keys on lines 1-5
+    - `SERVER_SESSION_SECRET=Insert any random string of characters here`
+    - `API_KEY=Insert your google API key here`
+    - `REACT_APP_API_KEY=Insert your google API key here`
+    - `REACT_APP_CLOUDINARY_NAME=Insert your Cloudinary cloud name here`
+    - `REACT_APP_CLOUDINARY_PRESET=Insert your Cloudinary preset name here`
+  
+
+5. Create a database titled "book_snoop" and create the tables found in `database.sql`
+6. Run `npm install` in your terminal to download the necessary modules
+7. Run `npm run client` to start React
+8. In a separate terminal, run `npm run server` to start the server
+9. Visit http://localhost:3000 in your browser to view the project!
+
+## Usage
+
+From the home page, search for a book! To refine your search, you can select 'title' or 'author' as your query type on the search page. 
+
+From the search results page, click on a book's 'view editions' button to see all existing publication versions of that book. When you find an edition of a book that you like, log in or register to add it to your profile's library or wishlist.
+
+From your profile page, click the default profile avatar / picture icon to upload a profile picture of your choice. From the 'wishlists' tab, click the 'move to library' button to move any book editions previously added to your wishlist to your library, or the 'delete from wishlist' button to remove it entirely. From your 'library' tab on your profile, edit an edition's 'condition' and 'location found' information. This information  is compiled and made available to other users on the 'more details' view on a book's editions page. 
 
 
-## Prerequisites
 
-Before you get started, make sure you have the following software installed on your computer:
+## Built With
 
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+* React
+* Redux-Saga
+* Javascript
+* Node
+* Express 
+* Open Library API
+* Google Maps API
+* Cloudinary
+* SQL
+* HTML
+* CSS
+* Material UI
+* Node-Postgres
+* PostgresSQL
+* BcryptJS
+* Passport
 
-## Create database and table
+## Acknowledgement
 
-Create a new database called `prime_app` and create a `user` table:
-
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
-
-## Development Setup Instructions
-
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
-
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+Special thanks to [Prime Digital Academy!](https://github.com/PrimeAcademy) 

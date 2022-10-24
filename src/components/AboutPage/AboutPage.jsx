@@ -44,9 +44,9 @@ export default function AboutPage() {
                 })}
               </Grid>
               <h3>Challenges and Future Plans</h3>
-              <p className="futureText">The Open Library API, Google Maps API, and Cloudinary were all self-taught technologies, and they happened to pose the greatest problems
+              <p className="futureText">The Open Library API, Google Maps API, and Cloudinary were all self-taught technologies, and they happened to pose the greatest challenges
                 due to their unique requirements, restrictions, and limitations. In the weeks to come, I hope to individualize social feed and the editions details view by user zip code, while also adding interactivity between the two.
-                 I also hope to add a friends list feature, the ability to sort by parameters in the search view, and increased profile customization.</p>
+                 I also hope to add a friends list feature, the ability to sort by different parameters in the search view, and increased profile customization.</p>
             </Box>
           </Box>
           <h3>Special Thanks To ...</h3>
