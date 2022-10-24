@@ -4,7 +4,7 @@
 **Prime Solo Project**
 *Duration: Two Weeks*
 
-Book Snoop is a full-stack book hunting application designed help users find a specific edition of a book. Users can browse for an edition using the app's search functionality and then add a given edition to their profile's wishlist or library. 
+Book Snoop is a full-stack book hunting application designed to help users find a specific edition of a book. Users can browse for an edition using the app's search functionality and then add a given edition to their profile's wishlist or library. 
 
 Upon adding an edition to their library, a user may enter the location where they found the addition along with what condition it was found in. This information is then compiled and integrated into the search tool, giving other users a list of addresses where a particular edition was found, and in what average condition. User activity is also featured in a social feed on the home page.
 
