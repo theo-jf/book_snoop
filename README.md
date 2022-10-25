@@ -41,7 +41,7 @@ The original project scope document, including first-draft wireframes, can be vi
 
 ## Installation and Setup
 
-Fully deployed app [here](https://polar-woodland-75929.herokuapp.com/)
+Visit the fully deployed app [here](https://polar-woodland-75929.herokuapp.com/)
 
 For now, run it locally:
 
