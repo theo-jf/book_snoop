@@ -3,10 +3,8 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchAddresses(action) {
     const bookIsbn = action.payload
-    console.log('book isbn:', bookIsbn);
     try {
         const addresses = yield axios.get(`/api/addresses/?isbn=${bookIsbn}`);
-        console.log('addresses:', addresses.data);
         yield put ({
             type: 'SET_ADDRESSES',
             payload: addresses.data
@@ -29,7 +27,6 @@ function* fetchNewAddressData(action) {
     // You cannot send a text search request to maps from the front end
     const query = action.payload.query;
     const updateId= action.payload.id;
-    console.log(query, 'id:', updateId);
     try {
         const newAddressesData = yield axios.get(`/api/newaddress?query=${query}`);
 
@@ -46,10 +43,6 @@ function* fetchNewAddressData(action) {
             zip: stateAndZip[2],
             googleMaps_placeId: newAddressesData.data.results[0].place_id             
         }
-
-        // if (confirm('Is this the right address?', newAddressObject)) {
-        //     console.log('new ADDY OBJECT:', newAddressObject);
-        // }
 
         yield put ({
             type: 'SAGA_UPDATE_LIBRARY_LOCATION',

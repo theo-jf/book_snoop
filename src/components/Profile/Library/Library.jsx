@@ -19,7 +19,6 @@ export default function Library() {
         <>
         {library.length === 0 ? <EmptySection section={'library'} />
                               : library.map((libraryItem) => {
-                                {console.log(libraryItem)}
                                     return (
                                         <LibraryItem key={libraryItem.library_id} 
                                                      libraryItem={libraryItem}

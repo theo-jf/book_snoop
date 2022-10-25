@@ -5,8 +5,6 @@ function* searchBooks(action) {
     // action.payload is a string
     const query = action.payload.query;
     const searchType = action.payload.searchType;
-    console.log('Search query:', action.payload.query);
-    console.log('Search type:', action.payload.searchType);
 
     try{
         const searchResults = yield axios.get(`/api/search/?type=${searchType}&query=${query}`)

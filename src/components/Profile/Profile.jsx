@@ -74,7 +74,6 @@ export default function Profile() {
     const onImageUploadHandler = (publicId) => {
         setUploadedImage([publicId]);
         
-        console.log('PUCLIC ID!!!', publicId);
         // Saga call to set a user's new profile picture
         dispatch({
             type: 'SAGA_SET_PROFILE_PICTURE',
