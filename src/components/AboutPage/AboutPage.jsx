@@ -32,7 +32,7 @@ export default function AboutPage() {
           <Box display="inline">
             <Box className="photoBox" display="flex" alignContent="center">
               <img className="headshot" src="Prime_Headshot.png" />
-              <img className="qrCode" src="LinkedIn_QR_Code.jpg" />
+              <img className="qrCode" src="./LinkedIn_QR_Code.jpg" />
             </Box>
             <Box className="techUsed">
               <h3>Technologies Used</h3>

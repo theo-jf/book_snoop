@@ -43,7 +43,7 @@ The original project scope document, including first-draft wireframes, can be vi
 
 Visit the fully deployed app [here](https://polar-woodland-75929.herokuapp.com/)
 
-For now, run it locally:
+Or, run it locally:
 
 1. Clone this repository from Github
 2. Create a free [Google Cloud](https://cloud.google.com) account
